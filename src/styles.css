@@ -211,3 +211,7 @@ input[checkbox] {
 	gap: 0.5rem;
 	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
+
+.search {
+  margin-top: 1rem;
+}

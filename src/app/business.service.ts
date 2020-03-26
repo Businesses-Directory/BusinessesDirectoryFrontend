@@ -6,8 +6,6 @@ import { BusinessToCreateModel } from 'src/models/BusinessToCreateModel';
 
 @Injectable()
 
-
-
 export class BusinessService {
     private headers: HttpHeaders;
 
@@ -15,8 +13,10 @@ export class BusinessService {
         this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
     }
 
-    fetchBusinesses(): Observable<object> {
-        return this.http.get('https://jsonplaceholder.typicode.com/posts');
+    fetchBusinesses(query?: any): Observable<object> {
+        return this.http.get('https://jsonplaceholder.typicode.com/posts', {
+          params: query,
+        });
     }
 
     addBusiness(data: any) {

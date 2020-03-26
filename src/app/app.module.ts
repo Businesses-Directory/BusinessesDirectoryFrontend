@@ -12,6 +12,7 @@ import {MatInputModule} from '@angular/material/input';
 import { FormDialogComponent } from './form-dialog/form-dialog.component';
 import {MaterialModule} from './material.module';
 import { BusinessService } from './business.service';
+import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
 
 
 @NgModule({
@@ -27,6 +28,8 @@ import { BusinessService } from './business.service';
     BrowserAnimationsModule,
     MatDialogModule,
     MaterialModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [ProductService, BusinessService],
   bootstrap: [AppComponent],

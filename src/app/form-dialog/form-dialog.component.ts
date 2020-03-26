@@ -17,6 +17,7 @@ export class FormDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.addBusinessForm = this.fb.group({
+      captcha: [null, {validators: [Validators.required], updateOn: 'change'}],
       businessName: [
         null,
         {

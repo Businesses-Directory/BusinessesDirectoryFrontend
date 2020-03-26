@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-
-import {ProductService} from './product.service';
+import { ActivatedRoute } from '@angular/router';
 import { FormDialogComponent } from './form-dialog/form-dialog.component';
+import { BusinessService } from './business.service';
 
 @Component({
   selector: 'app-root',
@@ -12,71 +12,40 @@ import { FormDialogComponent } from './form-dialog/form-dialog.component';
 })
 
 export class AppComponent {
-  title = 'angular';
-  products$;
-  form: FormGroup;
-  name = new FormControl("", Validators.required);
-  price = new FormControl(0.00, Validators.required);
-  category = new FormControl("Electronics", Validators.required);
-  qty = new FormControl(0, Validators.required);
-  dataPoints:any= [];
-  chart:any;
+  title = 'Business Directory';
+  businesses$;
+  searchForm: FormGroup;
+  q = new FormControl(null);
+  city = new FormControl(1);
+  type = new FormControl('');
 
-  constructor(private productService: ProductService, fb: FormBuilder, private dialog: MatDialog)
+  constructor(private businessService: BusinessService, fb: FormBuilder, private dialog: MatDialog, private route: ActivatedRoute)
   {
-    this.form = fb.group({
-      "name": this.name,
-      "price":this.price,
-      "category": this.category,
-      "qty": this.qty
+    this.searchForm = fb.group({
+      q: this.q,
+      city: this.city,
+      type: this.type
     });
   }
 
-
   ngOnInit() {
-    this.fetchProducts();
+    this.fetchBusinesses();
   }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.disableClose = true;
+    // dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.width = '95%';
 
     this.dialog.open(FormDialogComponent, dialogConfig);
   }
 
-
-  fetchProducts() {
-   this.products$ = this.productService.fetchProducts();
+  search() {
+    this.fetchBusinesses(this.searchForm.value);
   }
 
-  editProduct(product) {
-
-    const newName = prompt('Enter a new name for the product', product.name);
-    console.log(newName);
-
-    if (newName == null || newName == "") {
-      alert('Canceled');
-      return;
-    }
-
-    this.productService.updateProduct(newName, product.id);
-    //console.log(product);
-  }
-
-  addProduct() {
-  this.productService.addProduct(this.form.value).subscribe(res => console.log(res));
-    //console.log(demo);
-  }
-
-  deleteProduct(product) {
-    const c = confirm('Are you sure you want to delete ' + product.name + ' with a product ID of ' + product.id +'?');
-    if (c) {
-      this.products$ = this.productService.deleteProduct(product.id);
-      alert('Deleted');
-      return;
-    }
-    alert('Canceled');
+  fetchBusinesses(query?) {
+   this.businesses$ = this.businessService.fetchBusinesses(query);
   }
 }
