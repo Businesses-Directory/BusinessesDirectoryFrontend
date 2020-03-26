@@ -1,0 +1,119 @@
+
+
+<!-- <mat-dialog-container> -->
+  <mat-dialog-content>
+
+  <form [formGroup]="addBusinessForm" class="form-container">
+
+
+    <!-- Nombre y Tipo de negocio -->
+    <div>
+      <h2>A&ntilde;adir negocio</h2>
+    <div class='grid-blocks'>
+      <mat-form-field appearance="fill">
+        <mat-label>Nombre de negocio</mat-label>
+        <input matInput formControlName='businessName' required/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de negocio</mat-label>
+        <mat-select formControlName='businessTypeId' required>
+          <mat-option value="option">Option</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+    <!-- Detalles del negocio -->
+    <mat-form-field appearance="fill">
+      <mat-label>Descripci&oacute;n de negocio</mat-label>
+      <textarea matInput formControlName='businessDescription' required></textarea>
+    </mat-form-field>
+
+    <!-- Tels -->
+    <div class="grid-blocks">
+      <mat-form-field appearance="fill">
+        <mat-label>Tel&eacute;fono Primario</mat-label>
+        <input matInput formControlName='primaryPhoneNumber' type='number' required>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Tel&eacute;fono Secundario</mat-label>
+        <input formControlName='secondaryPhoneNumber' type='number' matInput>
+      </mat-form-field>
+    </div>
+
+    <!-- Pueblo -->
+    <mat-form-field appearance="fill">
+      <mat-label>Pueblo</mat-label>
+      <mat-select formControlName='cityId' required>
+        <mat-option value="option">Option</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Social -->
+    <div class="grid-blocks">
+      <mat-form-field appearance="fill">
+        <mat-label>Facebook</mat-label>
+        <input formControlName='inFacebookAs' matInput>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Instagram</mat-label>
+        <input formControlName='inInstagramAs' matInput>
+      </mat-form-field>
+    </div>
+
+    <!-- Features -->
+    <div>
+      <h2>Opciones de pedido</h2>
+      <div class='grid-blocks'>
+        <mat-checkbox formControlName='hasDelivery'>Delivery</mat-checkbox>
+        <mat-checkbox formControlName='hasCarryOut'>Carry Out</mat-checkbox>
+        <mat-checkbox formControlName='hasAthMovil'>ATH M&oacute;vil</mat-checkbox>
+        <mat-checkbox formControlName='inUberEats'>Uber Eats</mat-checkbox>
+        <mat-checkbox formControlName='inDameUnBite'>Dame un bite</mat-checkbox>
+        <mat-checkbox formControlName='inUva'>UVA</mat-checkbox>
+      </div>
+    </div>
+
+    <!-- Horario -->
+    <div style="margin-top: 0.5rem;">
+      <h2>Horario</h2>
+      <div class='grid-blocks'>
+        <mat-form-field appearance="fill">
+          <mat-label>Lunes</mat-label>
+          <input formControlName='mondayHours' matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Martes</mat-label>
+          <input formControlName='tuesdayHours' matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Miercoles</mat-label>
+          <input formControlName='wednesdayHours' matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Jueves</mat-label>
+          <input formControlName='thursdayHours' matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Viernes</mat-label>
+          <input formControlName='fridayHours' matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>S&aacute;bado</mat-label>
+          <input formControlName='saturdayHours' matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Domingo</mat-label>
+          <input formControlName='sundayHours' matInput>
+        </mat-form-field>
+      </div>
+    </div>
+    <!-- <mat-dialog-actions> -->
+
+      <button [disabled]='false' (click)='addBusiness()' mat-mat-raised-button color='indigo'>Crear</button>
+
+    <!-- </mat-dialog-actions> -->
+
+  </form>
+</mat-dialog-content>
+<!-- </mat-dialog-container> -->

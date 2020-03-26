@@ -1,0 +1,213 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html,
+body {
+	color: #2d3748;
+	font-size: 1rem;
+	font-weight: normal;
+  font-family: 'system-ui', sans-serif;
+  background-image:  linear-gradient(rgba(37, 50, 106, 0.01), rgba(37, 50, 106, 0.05));
+  min-height: 100vh;
+}
+
+main.app {
+	display: grid;
+}
+
+main.app > * {
+  padding: 2rem;
+}
+
+#negocios {
+	padding: 1.5rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+	gap: 1rem;
+}
+
+#header {
+  display: grid;
+  gap: 1.50rem;
+  grid-template-columns: 1fr auto;
+  justify-content: center;
+  align-items: center;
+  /* background-color: #fff; */
+  background-color: rgba(37, 50, 106, 1);
+}
+#header h1 {
+  display: grid;
+  font-weight: bold;
+  line-height: 1;
+  font-size: 1.75rem;
+  color: #fff
+}
+
+#header h1 small {
+	color: #e3e3e3;
+	font-size: 1.5rem;
+  font-weight: normal;
+  line-height: 1;
+}
+
+.link {
+  color:  rgb(63, 82, 167) !important;
+  text-decoration: none;
+
+}
+.link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.container {
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+	padding: 0.5rem;
+	margin-top: 2rem;
+	border-radius: 0.25rem;
+	background-color: #fff !important;
+}
+.shop-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#negocios {
+  display: grid;
+  list-style: none;
+  gap: 1rem;
+}
+
+.business-card {
+  display:grid;
+  line-height: 1.5;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+	padding: 0.5rem;
+	border-radius: 0.25rem;
+	background-color: #fff !important;
+}
+
+.business-card h2 {
+  display:grid;
+  line-height: 1.2;
+}
+
+.business-card h2 small {
+font-weight: normal;
+}
+
+.business-card h4 {
+  line-height: 1.25;
+  margin: 0;
+  font-weight: bold;
+}
+
+.business-card section {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  line-height: .9;
+  /* place-items: center; */
+}
+.business-card section div p {
+  line-height: .5;
+}
+.business-type {
+  font-weight: normal;
+  display: block;
+  font-size: .875rem;
+}
+.options li {
+  box-shadow: none !important;
+  list-style: none;
+  padding: 0;
+  margin-bottom: .5rem;
+}
+
+/* FORMS------------------------------------------- */
+
+.form-input {
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.form {
+	display: grid;
+}
+
+label, input, button {
+display: block;
+}
+
+.form-input label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	color: rgba(37, 50, 106, 0.5);
+}
+input, select {
+	width: 100%;
+}
+
+button,
+input.joe,
+select, .btn {
+	border: 0;
+	padding: 1rem 0.75rem;
+	border-radius: 0.25rem;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)
+}
+
+button, .btn {
+	font-weight: 600;
+	letter-spacing: 0.15rem;
+	text-transform: uppercase;
+	cursor: pointer;
+	background-color: rgba(37, 50, 106, 1);
+	color: #ebf4ff;
+	transition: 0.15s;
+	font-size: 0.75rem;
+}
+
+button:hover, .btn:hover {
+	background-color: rgba(37, 50, 106, 0.9);
+}
+
+button:disabled, .btn:disabled {
+	background-color: rgba(37, 50, 106, 0.3);
+	cursor: not-allowed;
+}
+
+a.btn {
+  text-decoration: none;
+}
+
+.checkbox {
+  display: grid;
+  grid-auto-flow: column;
+  border: 1px solid black;
+  align-items: center;
+  padding: 0.5rem;
+}
+.checkbox label {
+  font-weight: bold;
+  color: #000;
+}
+input[checkbox] {
+  box-shadow: none;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.grid-blocks {
+  display: grid;
+	gap: 0.5rem;
+	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
