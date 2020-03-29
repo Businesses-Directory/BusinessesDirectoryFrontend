@@ -39,7 +39,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchForm = this.fb.group({
-      searchControl: [null], vaditators: [Validators.pattern('[A-Za-z0-9 -]{*,200}')],
+      searchControl: [null], vaditators: [Validators.pattern('[A-Za-z0-9 -]{0,200}')],
       cityControl: [''],
       businessTypeControl: ['']
     });
