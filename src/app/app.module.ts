@@ -13,6 +13,7 @@ import { FormDialogComponent } from './form-dialog/form-dialog.component';
 import {MaterialModule} from './material.module';
 import { BusinessService } from './business.service';
 import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
+import { PageLoaderModule } from 'src/shared/page-loader/page-loader-module';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { RecaptchaModule, RecaptchaFormsModule } from 'ng-recaptcha';
     MatDialogModule,
     MaterialModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    PageLoaderModule
   ],
   providers: [ProductService, BusinessService],
   bootstrap: [AppComponent],
