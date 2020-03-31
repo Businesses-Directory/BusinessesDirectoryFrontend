@@ -4,23 +4,23 @@
 	box-sizing: border-box;
 }
 
-html,
-body {
+html, body {
 	color: #2d3748;
 	font-size: 1rem;
 	font-weight: normal;
   font-family: 'system-ui', sans-serif;
   background-image:  linear-gradient(rgba(37, 50, 106, 0.01), rgba(37, 50, 106, 0.05));
-  min-height: 100vh;
+  height: 100%;
+  /* min-height: 100vh; */
 }
 
 main.app {
 	display: grid;
 }
 
-main.app > * {
+/* main.app > * {
   padding: 2rem;
-}
+} */
 
 #negocios {
 	padding: 1.5rem;
@@ -29,16 +29,16 @@ main.app > * {
 	gap: 1rem;
 }
 
-#header {
+.header {
   display: grid;
-  gap: 1.50rem;
+  /* gap: 1.50rem; */
   grid-template-columns: 1fr auto;
   justify-content: center;
   align-items: center;
   /* background-color: #fff; */
   background-color: rgba(37, 50, 106, 1);
 }
-#header h1 {
+.header h1 {
   display: grid;
   font-weight: bold;
   line-height: 1;
@@ -46,7 +46,7 @@ main.app > * {
   color: #fff
 }
 
-#header h1 small {
+.header h1 small {
 	color: #e3e3e3;
 	font-size: 1.5rem;
   font-weight: normal;
@@ -56,7 +56,6 @@ main.app > * {
 .link {
   color:  rgb(63, 82, 167) !important;
   text-decoration: none;
-
 }
 .link:hover {
   cursor: pointer;
@@ -70,6 +69,7 @@ main.app > * {
 	border-radius: 0.25rem;
 	background-color: #fff !important;
 }
+
 .shop-name {
   display: flex;
   justify-content: space-between;
@@ -214,4 +214,8 @@ input[checkbox] {
 
 .search {
   margin-top: 1rem;
+}
+
+.footer {
+  padding: 0 !important;
 }

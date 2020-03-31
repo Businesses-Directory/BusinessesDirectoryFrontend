@@ -1,0 +1,35 @@
+// Theming your angular material app
+// https://material.angular.io/guide/theming
+
+// Angular Material Custom Theme Tutorial
+// https://www.youtube.com/watch?v=EBnTZwr0RSs
+
+// How to Always Keep the Footer at the Bottom of A Page | Learn HTML and CSS | HTML Tutorial
+// https://www.youtube.com/watch?v=qlCIXXhSX6Y
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+// INVID bulue for material palette
+// 100%      #ffffff
+// 95% 		 #eceef8
+// 90% 		 #d9def2
+// 85% 		 #c6cdeb
+// 80% 		 #b4bce4
+// 75% 		 #a1acde
+// 70% 		 #8e9bd7
+// 65% 		 #7b8bd1
+// 60% 		 #687aca
+// 55% 		 #5569c3
+// 50% 		 #4259bd
+// 45% 		 #3c50aa
+// 40% 		 #354797
+// 35% 		 #2e3e84
+// 30% 		 #283571
+// 28% 		 #25326a
+// 25% 		 #212c5e
+// 20% 		 #1b234b
+// 15% 		 #141b39
+// 10% 		 #0d1226
+// 5% 		 #070913
+// 0% 		 #000000

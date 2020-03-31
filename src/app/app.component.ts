@@ -27,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private searchValue: string = null;
   private cityValue: string = null;
   private typeValue: string = null;
+  public obtainedResults = false;
 
   constructor(
     private businessService: BusinessService,
