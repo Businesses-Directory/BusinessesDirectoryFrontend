@@ -17,7 +17,7 @@
       <mat-form-field appearance="fill">
         <mat-label>Tipo de negocio</mat-label>
         <mat-select formControlName='businessTypeId' required>
-          <mat-option value="option">Option</mat-option>
+          <mat-option *ngFor='let type of data.types' [value]='type.businessTypeId'>{{type.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -32,12 +32,12 @@
     <!-- Tels -->
     <div class="grid-blocks">
       <mat-form-field appearance="fill">
-        <mat-label>Tel&eacute;fono Primario</mat-label>
-        <input matInput formControlName='primaryPhoneNumber' type='number' required>
+        <mat-label>Tel&eacute;fono Primario (S&oacute;lo n&uacute;meros) </mat-label>
+        <input matInput formControlName='primaryPhoneNumber' minlength='10' placeholder="Ejemplo: 17871115050" maxlength='13' type='number' required>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Tel&eacute;fono Secundario</mat-label>
-        <input formControlName='secondaryPhoneNumber' type='number' matInput>
+        <input formControlName='secondaryPhoneNumber' minlength='0' placeholder="Ejemplo: 17871115050" maxlength='13' type='number' matInput>
       </mat-form-field>
     </div>
 
@@ -45,7 +45,7 @@
     <mat-form-field appearance="fill">
       <mat-label>Pueblo</mat-label>
       <mat-select formControlName='cityId' required>
-        <mat-option value="option">Option</mat-option>
+        <mat-option *ngFor='let city of data.cities' [value]="city.cityId">{{city.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
@@ -113,8 +113,8 @@
         <re-captcha formControlName="captcha" siteKey='6Lc1UeQUAAAAAKCDJd1Y1DuICWsXcwmQWxLU35o0'></re-captcha>
       </div>
 
-      <button [disabled]='this.addBusinessForm.invalid' (click)='addBusiness()' mat-mat-raised-button color='indigo'>Crear</button>
-
+      <button mat-raised-button color="primary" [disabled]='false' (click)='addBusiness()' class='dialog-btn' style="margin-top: 2rem;">Crear</button>
+      <button mat-button [mat-dialog-close]='this.addBusinessForm.value' class='dialog-btn' style="margin-top: 2rem;">Cancelar</button>
     <!-- </mat-dialog-actions> -->
 
   </form>

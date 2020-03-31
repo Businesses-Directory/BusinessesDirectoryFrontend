@@ -21,6 +21,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public businesses: Array<BusinessToListModel> = new Array<BusinessToListModel>();
   public cities: Array<CityModel> = new Array<CityModel>();
   public types: Array<BusinessTypeModel> = new Array<BusinessTypeModel>();
+
   public searchForm: FormGroup;
   public loadingContent = true;
   public firstLoad = true;
@@ -43,6 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
       cityControl: [''],
       businessTypeControl: ['']
     });
+
     this.fetchBusinesses();
   }
 
@@ -51,8 +53,19 @@ export class AppComponent implements OnInit, OnDestroy {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
     dialogConfig.width = '95%';
-    this.dialog.open(FormDialogComponent, dialogConfig);
+    dialogConfig.data = {
+      cities: this.cities,
+      types: this.types
+    };
+    console.log(dialogConfig.data);
+
+    const dialogRef = this.dialog.open(FormDialogComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(result); // add business form was closed
+    });
   }
   /**
    * @remarks

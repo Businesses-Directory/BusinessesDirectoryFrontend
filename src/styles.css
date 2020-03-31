@@ -25,7 +25,7 @@ main.app > * {
 #negocios {
 	padding: 1.5rem;
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 	gap: 1rem;
 }
 
@@ -152,7 +152,7 @@ input, select {
 	width: 100%;
 }
 
-button,
+button:not(.dialog-btn),
 input.joe,
 select, .btn {
 	border: 0;
@@ -161,7 +161,7 @@ select, .btn {
 	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06)
 }
 
-button, .btn {
+button:not(.dialog-btn), .btn {
 	font-weight: 600;
 	letter-spacing: 0.15rem;
 	text-transform: uppercase;
@@ -172,11 +172,11 @@ button, .btn {
 	font-size: 0.75rem;
 }
 
-button:hover, .btn:hover {
+button:not(.dialog-btn):hover, .btn:hover {
 	background-color: rgba(37, 50, 106, 0.9);
 }
 
-button:disabled, .btn:disabled {
+button:not(.dialog-btn):disabled, .btn:disabled {
 	background-color: rgba(37, 50, 106, 0.3);
 	cursor: not-allowed;
 }
@@ -214,4 +214,24 @@ input[checkbox] {
 
 .search {
   margin-top: 1rem;
+}
+
+a svg {
+  max-width: 2rem;
+}
+
+.social {
+  list-style: none;
+  display: inline-block;
+  align-items: center;
+  padding: 1rem;
+  margin: 0;
+  /* text-align: center; */
+}
+
+
+#search {
+  height: 20vh;
+  /* background-color: red; */
+  margin-bottom: 5rem;
 }
