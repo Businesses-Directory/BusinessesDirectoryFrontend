@@ -9,6 +9,8 @@ import { CityService } from './http-services/locations-services/city-service';
 import { BusinessToListModel } from 'src/models/received-models/business-models/business-to-list-model';
 import { BusinessTypeModel } from 'src/models/received-models/types-models/business-type-model';
 import { BusinessTypeService } from './http-services/types-services/business-type-service';
+import { FormStyle } from '@angular/common';
+import { BusinessToCreateModel } from 'src/models/BusinessToCreateModel';
 
 @Component({
   selector: 'app-root',
@@ -59,8 +61,6 @@ export class AppComponent implements OnInit, OnDestroy {
       cities: this.cities,
       types: this.types
     };
-    console.log(dialogConfig.data);
-
     const dialogRef = this.dialog.open(FormDialogComponent, dialogConfig);
 
     dialogRef.afterClosed().subscribe(result => {

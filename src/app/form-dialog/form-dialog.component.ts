@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { BusinessService } from '../business.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
@@ -24,7 +24,11 @@ export class FormDialogComponent implements OnInit {
       businessName: [
         null,
         {
-          validators: [Validators.required, Validators.minLength(5), Validators.maxLength(200), Validators.pattern('[A-Za-z0-9 -]{5,200}')],
+          validators: [
+            Validators.required,
+            Validators.maxLength(200),
+            Validators.pattern('[A-Za-z0-9áéíóú,ÁÉÍÓÚüÜ@ -]{2,200}')
+          ],
           updateOn: 'change'
         }
       ],
@@ -172,10 +176,30 @@ export class FormDialogComponent implements OnInit {
   }
 
   addBusiness() {
-    console.log(this.addBusinessForm);
-    const {mondayHours, tuesdayHours, wednesdayHours, thursdayHours, fridayHours, saturdayHours, sundayHours} = this.addBusinessForm.value;
+    const {
+      hasDelivery,
+      hasCarryOut,
+      hasAthMovil,
+      inUberEats,
+      inDameUnBite,
+      inUva,
+      mondayHours,
+      tuesdayHours,
+      wednesdayHours,
+      thursdayHours,
+      fridayHours,
+      saturdayHours,
+      sundayHours
+    } = this.addBusinessForm.value;
+
     const data = {
       ...this.addBusinessForm.value,
+      hasDelivery: hasDelivery || false,
+      hasCarryOut: hasCarryOut || false,
+      hasAthMovil: hasAthMovil || false,
+      inUberEats: inUberEats || false,
+      inDameUnBite: inDameUnBite || false,
+      inUva: inUva || false,
       businessHours: {
         monday: mondayHours ? true : false,
         mondayHours,
@@ -194,21 +218,110 @@ export class FormDialogComponent implements OnInit {
       }
     };
 
-    console.log(data);
+    this.service.addBusiness(data).subscribe(res => {
+      console.log(res);
+      Swal.fire({
+        icon: 'success',
+        title: `${data.businessName} fue agregado exitosamente`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }, error => {
+      console.error(error);
+      Swal.fire('Encontramos un error procesando la forma. Favor de intentar nuevamente.');
+
+    }, () => {});
 
     // if (this.addBusinessForm.valid) {
-      if (this.service.addBusiness(this.addBusinessForm)) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Su negocio fue creado exitosamente',
-          showConfirmButton: false,
-          timer: 1500
-        })
-
-      } else {
-        Swal.fire('Encontramos un error procesando la forma. Favor de intentar nuevamente.');
-      }
+     // submit (run try)
     // }
   }
 
+  get businessName() {
+    return this.addBusinessForm.get('businessName');
+  }
+  get businessTypeId() {
+    return this.addBusinessForm.get('addBusinessForm');
+  }
+  get cityId() {
+    return this.addBusinessForm.get('cityId');
+  }
+  get businessDescription() {
+    return this.addBusinessForm.get('businessDescription');
+  }
+  get primaryPhoneNumber() {
+    return this.addBusinessForm.get('primaryPhoneNumber');
+  }
+  get secondaryPhoneNumber() {
+    return this.addBusinessForm.get('secondaryPhoneNumber');
+  }
+  get inFacebookAs() {
+    return this.addBusinessForm.get('inFacebookAs');
+  }
+  get inInstagramAs() {
+    return this.addBusinessForm.get('inInstagramAs');
+  }
+  get hasDelivery() {
+    return this.addBusinessForm.get('hasDelivery');
+  }
+  get hasCarryOut() {
+    return this.addBusinessForm.get('hasCarryOut');
+  }
+  get hasAthMovil() {
+    return this.addBusinessForm.get('hasAthMovil');
+  }
+  get inUberEats() {
+    return this.addBusinessForm.get('inUberEats');
+  }
+  get inDameUnBite() {
+    return this.addBusinessForm.get('inDameUnBite');
+  }
+  get inUva() {
+    return this.addBusinessForm.get('inUva');
+  }
+  get businessHours() {
+    return this.addBusinessForm.get('businessHours');
+  }
+  get monday() {
+    return this.addBusinessForm.get('monday');
+  }
+  get mondayHours() {
+    return this.addBusinessForm.get('mondayHours');
+  }
+  get tuesday() {
+    return this.addBusinessForm.get('tuesday');
+  }
+  get tuesdayHours() {
+    return this.addBusinessForm.get('tuesdayHours');
+  }
+  get wednesday() {
+    return this.addBusinessForm.get('wednesday');
+  }
+  get wednesdayHours() {
+    return this.addBusinessForm.get('wednesdayHours');
+  }
+  get thursday() {
+    return this.addBusinessForm.get('thursday');
+  }
+  get thursdayHours() {
+    return this.addBusinessForm.get('thursdayHours');
+  }
+  get friday() {
+    return this.addBusinessForm.get('friday');
+  }
+  get fridayHours() {
+    return this.addBusinessForm.get('fridayHours');
+  }
+  get saturday() {
+    return this.addBusinessForm.get('saturday');
+  }
+  get saturdayHours() {
+    return this.addBusinessForm.get('saturdayHours');
+  }
+  get sunday() {
+    return this.addBusinessForm.get('sunday');
+  }
+  get sundayHours() {
+    return this.addBusinessForm.get('sundayHours');
+  }
 }

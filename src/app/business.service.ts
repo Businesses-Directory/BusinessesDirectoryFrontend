@@ -40,13 +40,11 @@ export class BusinessService {
     return this.http.get<Array<BusinessToListModel>>(apiRoutes.getBusinesses, { observe: 'response', params });
   }
 
-  public addBusiness(data: any) {
+  public addBusiness(businessToCreate: BusinessToCreateModel): Observable<HttpResponse<BusinessToListModel>> {
 
-      const body = JSON.stringify(data.value);
+      const body = JSON.stringify(businessToCreate);
       console.log(body);
 
-      return this.http.post('https://localhost:5003/api/businesses', body, {
-          headers: this.headers
-      });
+      return this.http.post<BusinessToListModel>(apiRoutes.getBusinesses, body, { observe: 'response', headers: this.headers});
   }
 }

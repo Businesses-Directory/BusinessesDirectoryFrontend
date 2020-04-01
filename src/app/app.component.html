@@ -44,11 +44,14 @@
             <!-- <button (click)='search()' class='search'>buscar</button> -->
           </form>
         </div>
+        <h1 *ngIf='businesses.length === 0' class="mat-display-1">No se encontraron resultados...</h1>
         <mat-divider></mat-divider>
           <div *ngIf='this.loadingContent === true'>
             <app-page-loader></app-page-loader>
           </div>
+
           <ol *ngIf='this.loadingContent === false' id='negocios'>
+
             <li *ngFor='let business of businesses'>
               <mat-expansion-panel>
                 <mat-expansion-panel-header>
