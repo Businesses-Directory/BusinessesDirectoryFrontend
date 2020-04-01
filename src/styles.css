@@ -5,39 +5,35 @@
 }
 
 html, body {
-	color: #2d3748;
+  height: 100%;
 	font-size: 1rem;
+	color: #2d3748;
 	font-weight: normal;
   font-family: 'system-ui', sans-serif;
   background-image:  linear-gradient(rgba(37, 50, 106, 0.01), rgba(37, 50, 106, 0.05));
-  height: 100%;
-  /* min-height: 100vh; */
 }
 
-main.app {
-	display: grid;
+.app {
+  /* display: grid; */
+  min-height: 100%;
 }
 
-/* main.app > * {
-  padding: 2rem;
-} */
-
-#negocios {
-	padding: 1.5rem;
-	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-	gap: 1rem;
+.main-content {
+  overflow: auto;
+  padding-bottom: 200px;
 }
 
 .header {
   display: grid;
-  /* gap: 1.50rem; */
+  gap: 1.50rem;
   grid-template-columns: 1fr auto;
   justify-content: center;
   align-items: center;
-  /* background-color: #fff; */
+  background-color: #fff;
+  height: 100px;
   background-color: rgba(37, 50, 106, 1);
 }
+
 .header h1 {
   display: grid;
   font-weight: bold;
@@ -53,7 +49,32 @@ main.app {
   line-height: 1;
 }
 
-.link {
+.footer {
+  position: relative;
+  height: 100px;
+  margin-top: -200px;
+  clear: both;
+}
+
+/* main.app {
+  display: grid;
+  min-height: 100%;
+} */
+
+/* main.app > * {
+  padding: 2rem;
+} */
+
+/* #negocios {
+	padding: 1.5rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+	gap: 1rem;
+} */
+
+
+
+/*.link {
   color:  rgb(63, 82, 167) !important;
   text-decoration: none;
 }
@@ -103,16 +124,16 @@ font-weight: normal;
 .business-card h4 {
   line-height: 1.25;
   margin: 0;
-  font-weight: bold;
-}
+  font-weight: bold; */
+/* } */
 
-.business-card section {
+/* .business-card section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   line-height: .9;
   /* place-items: center; */
-}
-.business-card section div p {
+/* } */
+/* .business-card section div p {
   line-height: .5;
 }
 .business-type {
@@ -125,11 +146,11 @@ font-weight: normal;
   list-style: none;
   padding: 0;
   margin-bottom: .5rem;
-}
+} */
 
 /* FORMS------------------------------------------- */
 
-.form-input {
+/* .form-input {
 	display: grid;
 	gap: 1rem;
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -214,8 +235,4 @@ input[checkbox] {
 
 .search {
   margin-top: 1rem;
-}
-
-.footer {
-  padding: 0 !important;
-}
+} */
