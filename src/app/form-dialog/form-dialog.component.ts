@@ -176,6 +176,17 @@ export class FormDialogComponent implements OnInit {
   }
 
   addBusiness() {
+    if (this.addBusinessForm.errors) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Encontramos errores en la forma',
+        showConfirmButton: false,
+        timer: 1000
+      });
+      return;
+    }
+
+    console.warn(this.addBusinessForm.errors);
     const {
       hasDelivery,
       hasCarryOut,
@@ -192,8 +203,12 @@ export class FormDialogComponent implements OnInit {
       sundayHours
     } = this.addBusinessForm.value;
 
+    const cityInfo = this.data.cities.filter(c => c.cityId === this.addBusinessForm.value.cityId)[0];
+
     const data = {
       ...this.addBusinessForm.value,
+      stateId: cityInfo.stateId,
+      countryId: cityInfo.countryId,
       hasDelivery: hasDelivery || false,
       hasCarryOut: hasCarryOut || false,
       hasAthMovil: hasAthMovil || false,
@@ -218,24 +233,25 @@ export class FormDialogComponent implements OnInit {
       }
     };
 
-    console.log('sending: ', data);
     this.service.addBusiness(data).subscribe(res => {
-      console.log(res);
       Swal.fire({
         icon: 'success',
         title: `${data.businessName} fue agregado exitosamente`,
         showConfirmButton: false,
         timer: 1500
-      });
+      }).then(r => location.reload());
     }, error => {
       console.error(error);
       Swal.fire('Encontramos un error procesando la forma. Favor de intentar nuevamente.');
-
     }, () => {});
 
     // if (this.addBusinessForm.valid) {
      // submit (run try)
     // }
+  }
+
+  get captcha() {
+    return this.addBusinessForm.get('captcha');
   }
 
   get businessName() {
