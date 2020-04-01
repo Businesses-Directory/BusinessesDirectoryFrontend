@@ -200,7 +200,7 @@ export class FormDialogComponent implements OnInit {
       inUberEats: inUberEats || false,
       inDameUnBite: inDameUnBite || false,
       inUva: inUva || false,
-      businessHours: {
+      businessDaysAndHours: {
         monday: mondayHours ? true : false,
         mondayHours,
         tuesday: tuesdayHours ? true : false,
@@ -218,6 +218,7 @@ export class FormDialogComponent implements OnInit {
       }
     };
 
+    console.log('sending: ', data);
     this.service.addBusiness(data).subscribe(res => {
       console.log(res);
       Swal.fire({
