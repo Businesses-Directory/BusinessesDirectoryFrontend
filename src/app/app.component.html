@@ -31,7 +31,7 @@
               </div>
               <div>
                 <label>Pueblo o ciudad</label>
-                <select formControlName='cityControl'>
+                <select formControlName='cityControl' (ngModelChange)='search()'>
                   <option value=''>Seleccione una ciudad</option>
                   <option *ngFor='let city of cities' [value]='city.normalizedName'>{{city.name}}</option>
                 </select>
@@ -39,7 +39,7 @@
               </div>
               <div>
                 <label>Tipo de negocio</label>
-                <select formControlName='businessTypeControl'>
+                <select formControlName='businessTypeControl' (ngModelChange)='search()'>
                   <option value=''>Seleccione un tipo</option>
                   <option *ngFor='let type of types' [value]='type.normalizedName'>{{type.name}}</option>
                 </select>

@@ -31,7 +31,6 @@
       <mat-label>Descripci&oacute;n de negocio</mat-label>
       <textarea matInput formControlName='businessDescription' required></textarea>
       <mat-error *ngIf='businessDescription.errors?.minlength'>Debe tener m&aacute;s de 10 car&aacute;cteres</mat-error>
-
     </mat-form-field>
 
     <!-- Tels -->
@@ -88,59 +87,57 @@
     <div style="margin-top: 0.5rem;">
       <h2>Horario</h2>
       <div class='grid-blocks'>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
           <mat-label>Lunes</mat-label>
           <input formControlName='mondayHours' matInput>
-      <mat-error *ngIf='mondayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
+          <mat-error *ngIf='mondayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+
+        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
           <mat-label>Martes</mat-label>
           <input formControlName='tuesdayHours' matInput>
-      <mat-error *ngIf='tuesdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
-
+          <mat-error *ngIf='tuesdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+
+        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
           <mat-label>Miercoles</mat-label>
           <input formControlName='wednesdayHours' matInput>
-      <mat-error *ngIf='wednesdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
-
+          <mat-error *ngIf='wednesdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+
+        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
           <mat-label>Jueves</mat-label>
           <input formControlName='thursdayHours' matInput>
-      <mat-error *ngIf='thursdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
-
+          <mat-error *ngIf='thursdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+
+        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
           <mat-label>Viernes</mat-label>
           <input formControlName='fridayHours' matInput>
-      <mat-error *ngIf='fridayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
-
+          <mat-error *ngIf='fridayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+
+        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
           <mat-label>S&aacute;bado</mat-label>
           <input formControlName='saturdayHours' matInput>
-      <mat-error *ngIf='saturdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
-
+          <mat-error *ngIf='saturdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+
+        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
           <mat-label>Domingo</mat-label>
           <input formControlName='sundayHours' matInput>
-      <mat-error *ngIf='sundayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
-
+          <mat-error *ngIf='sundayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
       </div>
     </div>
     <!-- <mat-dialog-actions> -->
 
-        <re-captcha formControlName="captcha" siteKey='6Lc1UeQUAAAAAKCDJd1Y1DuICWsXcwmQWxLU35o0'></re-captcha>
-        <mat-error *ngIf='captcha.errors?.required'>La verificaci&oacute;n es requerida</mat-error>
+    <re-captcha formControlName="captcha" siteKey='6Lc1UeQUAAAAAKCDJd1Y1DuICWsXcwmQWxLU35o0'></re-captcha>
+    <mat-error *ngIf='captcha.errors?.required'>La verificaci&oacute;n es requerida</mat-error>
 
-
-
-      <!-- Form is always invalid for some reason -->
-      <button mat-raised-button color="primary" [disabled]='false' (click)='addBusiness()' class='dialog-btn' style="margin-top: 2rem;">Crear</button>
-      <button mat-button [mat-dialog-close]='this.addBusinessForm.value' class='dialog-btn' style="margin-top: 2rem;">Cancelar</button>
+    <!-- Form is always invalid for some reason -->
+    <button mat-raised-button color="primary" [disabled]='false' (click)='addBusiness()' class='dialog-btn' style="margin-top: 2rem;">Crear</button>
+    <button mat-button [mat-dialog-close]='this.addBusinessForm.value' class='dialog-btn' style="margin-top: 2rem;">Cancelar</button>
     <!-- </mat-dialog-actions> -->
 
   </form>
