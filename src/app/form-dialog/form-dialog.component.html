@@ -3,44 +3,38 @@
 <!-- <mat-dialog-container> -->
   <mat-dialog-content>
 
-  <form [formGroup]="addBusinessForm" class="form-container">
-
-
+  <form [formGroup]='addBusinessForm'>
     <!-- Nombre y Tipo de negocio -->
     <div>
       <h2>A&ntilde;adir negocio</h2>
-    <div class='grid-blocks'>
-      <mat-form-field appearance="fill">
+    </div>
+    <div class='d-flex flex-column flex-md-row justify-content-between'>
+      <mat-form-field class='col-12'>
         <mat-label>Nombre de negocio</mat-label>
         <input matInput formControlName='businessName' required/>
-        <mat-error *ngIf='businessName.errors?.minimumLength'>Utilice s&oacute;lo letras, n&uacute;meros, apostrofes</mat-error>
+        <mat-error *ngIf='businessName.errors?.minimumLength'>El nombre debe tener m&acute;s de tres(3) letras.</mat-error>
         <mat-error *ngIf='businessName.errors?.pattern'>Utilice s&oacute;lo letras, n&uacute;meros, apostrofes</mat-error>
         <mat-error *ngIf='businessName.errors?.maxlength'>No puede utilizar mas de 200 caracteres, se paso por: {{businessName.errors.maxlength.actualLength - businessName.errors.maxlength.requiredLength}}</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Tipo de negocio</mat-label>
-        <mat-select formControlName='businessTypeId' required>
-          <mat-option *ngFor='let type of data.types' [value]='type.businessTypeId'>{{type.name}}</mat-option>
-        </mat-select>
-      </mat-form-field>
     </div>
-  </div>
 
     <!-- Detalles del negocio -->
-    <mat-form-field appearance="fill">
-      <mat-label>Descripci&oacute;n de negocio</mat-label>
-      <textarea matInput formControlName='businessDescription' required></textarea>
-      <mat-error *ngIf='businessDescription.errors?.minlength'>Debe tener m&aacute;s de 10 car&aacute;cteres</mat-error>
-    </mat-form-field>
+    <div class='d-flex flex-column flex-md-row justify-content-between'>
+      <mat-form-field hintLabel='Utilice letras, números, espacios y puntos.' class='col-12'>
+        <mat-label>Descripci&oacute;n de negocio</mat-label>
+        <textarea matInput formControlName='businessDescription' required></textarea>
+        <mat-error *ngIf='businessDescription.errors?.minlength'>Debe tener m&aacute;s de 10 car&aacute;cteres</mat-error>
+      </mat-form-field>
+    </div>
 
     <!-- Tels -->
-    <div class="grid-blocks">
-      <mat-form-field appearance="fill">
+    <div class='d-flex flex-column flex-md-row justify-content-between'>
+      <mat-form-field class='col-12 col-md-6'>
         <mat-label>Tel&eacute;fono Primario (S&oacute;lo n&uacute;meros) </mat-label>
         <input matInput formControlName='primaryPhoneNumber' minlength='10' placeholder="Ejemplo: 17871115050" maxlength='13' type='number' required>
         <mat-error *ngIf='primaryPhoneNumber.errors?.pattern'>Favor de entrar un n&uacute;mero v&aacute;lido. (Ejemplo: 17871110022)</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+      <mat-form-field class='col-12 col-md-6'>
         <mat-label>Tel&eacute;fono Secundario</mat-label>
         <input formControlName='secondaryPhoneNumber' minlength='0' placeholder="Ejemplo: 17871115050" maxlength='13' type='number' matInput>
         <mat-error *ngIf='secondaryPhoneNumber.errors?.pattern'>Favor de entrar un n&uacute;mero v&aacute;lido. (Ejemplo: 17871110022)</mat-error>
@@ -48,30 +42,37 @@
     </div>
 
     <!-- Pueblo -->
-    <mat-form-field appearance="fill">
+    <mat-form-field>
       <mat-label>Pueblo</mat-label>
       <mat-select formControlName='cityId' required>
-        <mat-option *ngFor='let city of data.cities' [value]="city.cityId">{{city.name}}</mat-option>
+        <mat-option *ngFor='let city of data.cities' [value]='city.cityId'>{{city.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Tipo de negocio</mat-label>
+      <mat-select formControlName='businessTypeId' required>
+        <mat-option *ngFor='let type of data.types' [value]='type.businessTypeId'>{{type.name}}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <!-- Social -->
     <div class="grid-blocks">
-      <mat-form-field appearance="fill">
+      <mat-form-field>
         <mat-label>Facebook</mat-label>
         <input formControlName='inFacebookAs' matInput>
       <mat-error *ngIf='inFacebookAs.errors?.pattern'>Se aceptan letras, n&uacute;meros, _ y -</mat-error>
       </mat-form-field>
-      <mat-form-field appearance="fill">
+
+      <mat-form-field>
         <mat-label>Instagram</mat-label>
         <input formControlName='inInstagramAs' matInput>
       <mat-error *ngIf='inInstagramAs.errors?.pattern'>Se aceptan letras, n&uacute;meros, _ y -</mat-error>
-
       </mat-form-field>
     </div>
 
     <!-- Features -->
-    <div>
+    <div class='d-flex flex-inline'>
       <h2>Opciones de pedido</h2>
       <div class='grid-blocks'>
         <mat-checkbox formControlName='hasDelivery'>Delivery</mat-checkbox>
@@ -84,46 +85,46 @@
     </div>
 
     <!-- Horario -->
-    <div style="margin-top: 0.5rem;">
+    <div class='d-flex flex-column'>
       <h2>Horario</h2>
-      <div class='grid-blocks'>
-        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
+      <div class='d-flex flex-column flex-sm-row justify-content-between'>
+        <mat-form-field hintLabel='8:00AM-11:00PM'>
           <mat-label>Lunes</mat-label>
           <input formControlName='mondayHours' matInput>
           <mat-error *ngIf='mondayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
+        <mat-form-field hintLabel='8:00AM-11:00PM'>
           <mat-label>Martes</mat-label>
           <input formControlName='tuesdayHours' matInput>
           <mat-error *ngIf='tuesdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
+        <mat-form-field hintLabel='8:00AM-11:00PM'>
           <mat-label>Miercoles</mat-label>
           <input formControlName='wednesdayHours' matInput>
           <mat-error *ngIf='wednesdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
+        <mat-form-field hintLabel='8:00AM-11:00PM'>
           <mat-label>Jueves</mat-label>
           <input formControlName='thursdayHours' matInput>
           <mat-error *ngIf='thursdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
+        <mat-form-field hintLabel='8:00AM-11:00PM'>
           <mat-label>Viernes</mat-label>
           <input formControlName='fridayHours' matInput>
           <mat-error *ngIf='fridayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
+        <mat-form-field hintLabel='8:00AM-11:00PM'>
           <mat-label>S&aacute;bado</mat-label>
           <input formControlName='saturdayHours' matInput>
           <mat-error *ngIf='saturdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="fill" hintLabel="8:00AM-11:00PM">
+        <mat-form-field hintLabel='8:00AM-11:00PM'>
           <mat-label>Domingo</mat-label>
           <input formControlName='sundayHours' matInput>
           <mat-error *ngIf='sundayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>

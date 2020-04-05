@@ -11,7 +11,7 @@ body {
 	font-weight: normal;
   font-family: 'system-ui', sans-serif;
   background-image:  linear-gradient(rgba(37, 50, 106, 0.01), rgba(37, 50, 106, 0.05));
-  min-height: 100vh;
+  min-height: 100%;
 }
 
 main.app {
@@ -40,6 +40,7 @@ main.app > * {
   position: sticky;
   /* background-color: #fff; */
   background-color: rgba(37, 50, 106, 1);
+  /* #25326a */
 }
 #header h1 {
   display: grid;

@@ -1,0 +1,27 @@
+@import '~@angular/material/theming';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'src/assets/scss/main.scss';
+
+@include mat-core();
+// 100% 		 #ffffff
+// 95% 		 #eceef8
+// 90% 		 #d9def2
+// 85% 		 #c6cdeb
+// 80% 		 #b4bce4
+// 75% 		 #a1acde
+// 70% 		 #8e9bd7
+// 65% 		 #7b8bd1
+// 60% 		 #687aca
+// 55% 		 #5569c3
+// 50% 		 #4259bd
+// 45% 		 #3c50aa
+// 40% 		 #354797
+// 35% 		 #2e3e84
+// 30% 		 #283571
+// 28% 		 #25326a
+// 25% 		 #212c5e
+// 20% 		 #1b234b
+// 15% 		 #141b39
+// 10% 		 #0d1226
+// 5% 		 #070913
+// 0% 		 #000000
