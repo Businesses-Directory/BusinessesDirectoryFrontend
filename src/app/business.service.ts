@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {FormGroup, FormControl} from '@angular/forms';
-import { BusinessToCreateModel } from 'src/models/BusinessToCreateModel';
+import { BusinessToCreateModel } from 'src/models/business-to-create-model';
 import { BusinessToListModel } from 'src/models/received-models/business-models/business-to-list-model';
 import { environment } from 'src/environments/environment';
 
@@ -20,7 +20,7 @@ export class BusinessService {
 
   constructor(private http: HttpClient) {
     this.api = environment.apiUrl;
-      this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
+    this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   }
 
   // fetchBusinesses(query?: any): Observable<object> {
@@ -44,10 +44,8 @@ export class BusinessService {
   }
 
   public addBusiness(businessToCreate: BusinessToCreateModel): Observable<HttpResponse<BusinessToListModel>> {
-
-      const body = JSON.stringify(businessToCreate);
-      console.log(body);
-
-      return this.http.post<BusinessToListModel>(this.api + apiRoutes.getBusinesses, body, { observe: 'response', headers: this.headers});
+    const body = JSON.stringify(businessToCreate);
+    console.log(body);
+    return this.http.post<BusinessToListModel>(this.api + apiRoutes.getBusinesses, body, { observe: 'response', headers: this.headers});
   }
 }

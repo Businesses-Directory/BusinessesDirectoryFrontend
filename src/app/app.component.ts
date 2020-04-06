@@ -10,7 +10,6 @@ import { BusinessToListModel } from 'src/models/received-models/business-models/
 import { BusinessTypeModel } from 'src/models/received-models/types-models/business-type-model';
 import { BusinessTypeService } from './http-services/types-services/business-type-service';
 import { FormStyle } from '@angular/common';
-import { BusinessToCreateModel } from 'src/models/BusinessToCreateModel';
 
 @Component({
   selector: 'app-root',
@@ -52,14 +51,15 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {}
 
-  openDialog() {
+  public openDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width = '95%';
+    dialogConfig.width = '100%';
+    dialogConfig.height = '80%';
     dialogConfig.data = {
       cities: this.cities,
-      types: this.types
+      types: this.types,
     };
     const dialogRef = this.dialog.open(FormDialogComponent, dialogConfig);
 

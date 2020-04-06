@@ -3,6 +3,9 @@ import { BusinessService } from '../business.service';
 import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/forms';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { BusinessToCreateModel } from 'src/models/business-to-create-model';
+import { ICreateBusinessData } from 'src/models/interfaces/icreate-business-data';
+import { IError } from 'src/models/interfaces/ierror';
 
 @Component({
   selector: 'app-form-dialog',
@@ -11,18 +14,19 @@ import Swal from 'sweetalert2';
 })
 
 export class FormDialogComponent implements OnInit {
-  public phoneMask = ['[1]{0,1}', '(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  // public phoneMask = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  public phoneMask = '((1(787)|(787))[\d]{3}-[\d]{4})';
   public addBusinessForm: FormGroup;
 
-  constructor(private service: BusinessService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) { }
+  constructor(private service: BusinessService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: ICreateBusinessData) { }
 
   ngOnInit(): void {
     this.addBusinessForm = this.fb.group({
       captcha: [
-        null,
+        false,
         {
           validators: [
-          Validators.required
+            Validators.requiredTrue
           ],
           updateOn: 'change'
         }
@@ -32,8 +36,8 @@ export class FormDialogComponent implements OnInit {
         {
           validators: [
             Validators.required,
-            Validators.maxLength(200),
-            Validators.pattern('[A-Za-z0-9áéíóú,ÁÉÍÓÚüÜ@ -]{2,200}')
+            Validators.maxLength(300),
+            Validators.pattern('[A-Za-z0-9áéíóú,ÁÉÍÓÚüÜ@ -]{2,300}')
           ],
           updateOn: 'change'
         }
@@ -56,7 +60,7 @@ export class FormDialogComponent implements OnInit {
             Validators.required,
             Validators.minLength(10),
             Validators.maxLength(600),
-            Validators.pattern('[A-Za-z0-9áéíóú,.ÁÉÍÓÚüÜ@ -]{2,600}')
+            Validators.pattern('[A-Za-z0-9áéíóú,.ÁÉÍÓÚüÜ -]{2,600}')
           ],
           updateOn: 'change'
         }
@@ -79,7 +83,7 @@ export class FormDialogComponent implements OnInit {
           validators: [
             Validators.minLength(10),
             Validators.maxLength(11),
-            Validators.pattern('[0-9]{10,11}')
+            Validators.pattern('[0-9]{10,50}')
           ],
           updateOn: 'change'
         }
@@ -128,7 +132,7 @@ export class FormDialogComponent implements OnInit {
         false,
         {
           validators: [
-            Validators.requiredTrue
+            Validators.required
           ],
           updateOn: 'change'
         }
@@ -137,7 +141,7 @@ export class FormDialogComponent implements OnInit {
         false,
         {
           validators: [
-            Validators.requiredTrue
+            Validators.required
           ],
           updateOn: 'change'
         }
@@ -146,7 +150,7 @@ export class FormDialogComponent implements OnInit {
         false,
         {
           validators: [
-            Validators.requiredTrue
+            Validators.required
           ],
           updateOn: 'change'
         }
@@ -155,7 +159,7 @@ export class FormDialogComponent implements OnInit {
         false,
         {
           validators: [
-            Validators.requiredTrue
+            Validators.required
           ],
           updateOn: 'change'
         }
@@ -164,7 +168,7 @@ export class FormDialogComponent implements OnInit {
         false,
         {
           validators: [
-            Validators.requiredTrue
+            Validators.required
           ],
           updateOn: 'change'
         }
@@ -173,7 +177,7 @@ export class FormDialogComponent implements OnInit {
         false,
         {
           validators: [
-            Validators.requiredTrue
+            Validators.required
           ],
           updateOn: 'change'
         }
@@ -244,74 +248,136 @@ export class FormDialogComponent implements OnInit {
     });
   }
 
-  addBusiness() {
+  public addBusiness(): void {
+    if (this.mondayHours === null && this.tuesdayHours.value === null && this.wednesdayHours === null && this.thursdayHours === null
+      && this.fridayHours === null && this.saturdayHours === null && this.sundayHours.value === null) {
+      Swal.fire(
+        {
+          icon: 'error',
+          title: 'Error en Horario',
+          text: 'Debe realizar al menos una entrada en datos de horarios.',
+          showConfirmButton: true
+        }
+      );
+      return;
+    }
+    if (this.captcha.value === false) {
+      Swal.fire(
+        {
+          icon: 'error',
+          title: 'Captcha Error',
+          text: 'Favor realice la verificación del captcha.',
+          showConfirmButton: true
+        }
+      );
+      return;
+    }
     if (this.addBusinessForm.errors) {
       Swal.fire({
         icon: 'error',
-        title: 'Encontramos errores en la forma',
-        showConfirmButton: false,
-        timer: 1000
+        title: 'Error',
+        showConfirmButton: true
       });
       return;
     }
 
-    console.warn(this.addBusinessForm.errors);
-    const {
-      hasDelivery,
-      hasCarryOut,
-      hasAthMovil,
-      inUberEats,
-      inDameUnBite,
-      inUva,
-      mondayHours,
-      tuesdayHours,
-      wednesdayHours,
-      thursdayHours,
-      fridayHours,
-      saturdayHours,
-      sundayHours
-    } = this.addBusinessForm.value;
+    const cityInfo = this.data.cities.find(c => c.cityId === this.addBusinessForm.value.cityId);
 
-    const cityInfo = this.data.cities.filter(c => c.cityId === this.addBusinessForm.value.cityId)[0];
+    const businessToCreate: BusinessToCreateModel = new BusinessToCreateModel();
 
-    const data = {
-      ...this.addBusinessForm.value,
-      stateId: cityInfo.stateId,
-      countryId: cityInfo.countryId,
-      hasDelivery: hasDelivery || false,
-      hasCarryOut: hasCarryOut || false,
-      hasAthMovil: hasAthMovil || false,
-      inUberEats: inUberEats || false,
-      inDameUnBite: inDameUnBite || false,
-      inUva: inUva || false,
-      businessDaysAndHours: {
-        monday: mondayHours ? true : false,
-        mondayHours,
-        tuesday: tuesdayHours ? true : false,
-        tuesdayHours,
-        wednesday: wednesdayHours ? true : false,
-        wednesdayHours,
-        thursday: thursdayHours ? true : false,
-        thursdayHours,
-        friday: fridayHours ? true : false,
-        fridayHours,
-        saturday: saturdayHours ? true : false,
-        saturdayHours,
-        sunday: sundayHours ? true : false,
-        sundayHours
-      }
-    };
+    businessToCreate.businessName = this.addBusinessForm.value.businessName;
+    businessToCreate.businessEmail = this.addBusinessForm.value.businessEmail;
+    businessToCreate.businessDescription = this.addBusinessForm.value.businessDescription;
+    businessToCreate.primaryPhoneNumber = this.addBusinessForm.value.primaryPhoneNumber;
+    businessToCreate.primaryPhoneNumber = this.addBusinessForm.value.primaryPhoneNumber;
+    businessToCreate.businessTypeId = this.addBusinessForm.value.businessTypeId;
+    businessToCreate.cityId = this.addBusinessForm.value.cityId;
+    businessToCreate.stateId = cityInfo.stateId;
+    businessToCreate.countryId = cityInfo.countryId;
+    businessToCreate.inFacebookAs = this.addBusinessForm.value.inFacebookAs;
+    businessToCreate.inInstagramAs = this.addBusinessForm.value.inInstagramAs;
+    businessToCreate.hasDelivery = this.addBusinessForm.value.hasDelivery;
+    businessToCreate.hasCarryOut = this.addBusinessForm.value.hasCarryOut;
+    businessToCreate.hasAthMovil = this.addBusinessForm.value.hasAthMovil;
+    businessToCreate.inDameUnBite = this.addBusinessForm.value.inDameUnBite;
+    businessToCreate.inUberEats = this.addBusinessForm.value.inUberEats;
+    businessToCreate.inUva = this.addBusinessForm.value.inUva;
+    businessToCreate.businessHours.monday = this.mondayHours.value !== null ? true : false;
+    businessToCreate.businessHours.mondayHours = this.mondayHours.value;
+    businessToCreate.businessHours.tuesday = this.tuesdayHours.value !== null ? true : false;
+    businessToCreate.businessHours.tuesdayHours = this.tuesdayHours.value;
+    businessToCreate.businessHours.wednesday = this.wednesdayHours.value !== null ? true : false;
+    businessToCreate.businessHours.wednesdayHours = this.wednesdayHours.value;
+    businessToCreate.businessHours.thursday = this.thursdayHours.value !== null ? true : false;
+    businessToCreate.businessHours.thursdayHours = this.thursdayHours.value;
+    businessToCreate.businessHours.friday = this.fridayHours.value !== null ? true : false;
+    businessToCreate.businessHours.fridayHours = this.fridayHours.value;
+    businessToCreate.businessHours.saturday = this.saturdayHours.value !== null ? true : false;
+    businessToCreate.businessHours.saturdayHours = this.saturdayHours.value;
+    businessToCreate.businessHours.sunday = this.sundayHours.value !== null ? true : false;
+    businessToCreate.businessHours.sundayHours = this.sundayHours.value;
 
-    this.service.addBusiness(data).subscribe(res => {
+    // const {
+    //   hasDelivery,
+    //   hasCarryOut,
+    //   hasAthMovil,
+    //   inUberEats,
+    //   inDameUnBite,
+    //   inUva,
+    //   mondayHours,
+    //   tuesdayHours,
+    //   wednesdayHours,
+    //   thursdayHours,
+    //   fridayHours,
+    //   saturdayHours,
+    //   sundayHours
+    // } = this.addBusinessForm.value;
+
+    // const data = {
+    //   ...this.addBusinessForm.value,
+    //   stateId: cityInfo.stateId,
+    //   countryId: cityInfo.countryId,
+    //   hasDelivery: hasDelivery || false,
+    //   hasCarryOut: hasCarryOut || false,
+    //   hasAthMovil: hasAthMovil || false,
+    //   inUberEats: inUberEats || false,
+    //   inDameUnBite: inDameUnBite || false,
+    //   inUva: inUva || false,
+    //   businessDaysAndHours: {
+    //     monday: mondayHours ? true : false,
+    //     mondayHours,
+    //     tuesday: tuesdayHours ? true : false,
+    //     tuesdayHours,
+    //     wednesday: wednesdayHours ? true : false,
+    //     wednesdayHours,
+    //     thursday: thursdayHours ? true : false,
+    //     thursdayHours,
+    //     friday: fridayHours ? true : false,
+    //     fridayHours,
+    //     saturday: saturdayHours ? true : false,
+    //     saturdayHours,
+    //     sunday: sundayHours ? true : false,
+    //     sundayHours
+    //   }
+    // };
+
+    this.service.addBusiness(businessToCreate).subscribe(res => {
       Swal.fire({
         icon: 'success',
-        title: `${data.businessName} fue agregado exitosamente`,
+        title: `${businessToCreate.businessName} fue agregado exitosamente`,
         showConfirmButton: false,
         timer: 1500
-      }).then(r => location.reload());
-    }, error => {
-      console.error(error);
-      Swal.fire('Encontramos un error procesando la forma. Favor de intentar nuevamente.');
+      });
+    },
+    (error: IError ) => {
+      Swal.fire(
+        {
+          icon: error.type,
+          title: error.title,
+          text: error.detail,
+          showConfirmButton: true
+        }
+      );
     }, () => {});
   }
 
@@ -435,5 +501,4 @@ export class FormDialogComponent implements OnInit {
   get sundayHours() {
     return this.addBusinessForm.get('sundayHours');
   }
-
 }

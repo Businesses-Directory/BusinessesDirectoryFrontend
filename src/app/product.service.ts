@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import { Observable } from 'rxjs';
-import { BusinessToCreateModel } from 'src/models/BusinessToCreateModel';
+import { BusinessToCreateModel } from 'src/models/business-to-create-model';
 @Injectable()
 
 

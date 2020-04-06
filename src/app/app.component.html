@@ -35,15 +35,15 @@
                 <mat-form-field hintLabel='Filtre por la ubicaci&oacute;n del negocio.' class='col-12 col-md-4'>
                     <mat-label>Pueblo o ciudad</mat-label>
                     <mat-select formControlName='cityControl' (ngModelChange)='search()'>
-                      <option value=''>Seleccione una ciudad</option>
-                      <option *ngFor='let city of cities' [value]='city.normalizedName'>{{city.name}}</option>
+                      <mat-option value=''>Seleccione una ciudad</mat-option>
+                      <mat-option *ngFor='let city of cities' [value]='city.normalizedName'>{{city.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field hintLabel='Filtre por el tipo de negocio' class='col-12 col-md-4'>
                     <mat-label>Tipo de negocio</mat-label>
                     <mat-select formControlName='businessTypeControl' (ngModelChange)='search()'>
-                      <option value=''>Seleccione un tipo</option>
-                      <option *ngFor='let type of types' [value]='type.normalizedName'>{{type.name}}</option>
+                      <mat-option value=''>Seleccione un tipo</mat-option>
+                      <mat-option *ngFor='let type of types' [value]='type.normalizedName'>{{type.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
               </div>
