@@ -66,12 +66,12 @@
 
               <li *ngFor='let business of businesses'>
                 <mat-expansion-panel>
-                  <mat-expansion-panel-header>
+                  <mat-expansion-panel-header style="display: flex; align-items: center; justify-content: space-between;">
                     <mat-panel-title>
                       {{business.businessName}}
                     </mat-panel-title>
                     <mat-panel-description>
-                      {{business.businessType.name}} ({{business.primaryPhoneNumber}})
+                       <span *ngIf='business.primaryPhoneNumber'>{{business.primaryPhoneNumber | mask: '(000) 000-0000'}}</span>
                     </mat-panel-description>
                   </mat-expansion-panel-header>
 
@@ -81,12 +81,12 @@
                     <mat-list>
                       <div mat-subheader>Contacto</div>
                       <mat-list-item>
-                        <a class='link' href="tel:{{business.primaryPhoneNumber}}">{{business.primaryPhoneNumber}}</a>
+                        <a class='link' *ngIf='business.primaryPhoneNumber' href="tel:{{business.primaryPhoneNumber}}">{{business.primaryPhoneNumber | mask: '(000) 000-0000'}}</a>
 
 
                       </mat-list-item>
                       <mat-list-item>
-                        <a class='link' href="tel:{{business.secondaryPhoneNumber}}">{{business.primaryPhoneNumber}}</a>
+                        <a class='link'*ngIf='business.secondaryPhoneNumber'  href="tel:{{business.secondaryPhoneNumber}}">{{business.secondaryPhoneNumber | mask: '(000) 000-0000'}}</a>
 
                       </mat-list-item>
                     </mat-list>
