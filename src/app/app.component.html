@@ -16,9 +16,9 @@
           </mat-card>
         </header>
         <div class='d-flex flex-column flex-fill'>
-          <div class="d-flex flex-column px-2 px-sm-5 mb-4">
-            <div class="d-flex flex-column-reverse flex-md-row flex-fill py-2">
-              <div class="col-12 col-md-6 col-lg-4">
+          <div class='d-flex flex-column px-2 px-sm-5 mb-2'>
+            <div class='d-flex flex-column-reverse flex-md-row flex-fill py-2'>
+              <div class='col-12 col-md-6 col-lg-4'>
                 <h1>Buscar</h1>
               </div>
               <div class='d-flex flex-fill justify-content-end'>
@@ -27,34 +27,25 @@
             </div>
 
             <form [formGroup]='searchForm'>
-              <div class='d-flex flex-column flex-md-row flex-fill justify-content-between py-2'>
-                <div class='col-12 col-md-3'>
-                  <div class='d-flex flex-column'>
-                    <label>Nombre del negocio</label>
-                    <input class='joe' type='text' formControlName='searchControl' placeholder="Buscar por nombre" (ngModelChange)='search()'>
-                    <p class="help">Busque por nombre del negocio</p>
-                  </div>
-                </div>
-                <div class='col-12 col-md-3'>
-                  <div class='d-flex flex-column'>
-                    <label>Pueblo o ciudad</label>
-                    <select formControlName='cityControl' (ngModelChange)='search()'>
+              <div class='d-flex flex-column flex-lg-row flex-fill justify-content-between py-2'>
+                <mat-form-field hintLabel='Busque por nombre, tel&eacute;fono o correo electr&oacute;nico.' class='col-12 col-md-4'>
+                    <mat-label>B&uacute;squeda</mat-label>
+                    <input type='text' matInput formControlName='searchControl' placeholder='B&uacute;squeda' (ngModelChange)='search()'>
+                </mat-form-field>
+                <mat-form-field hintLabel='Filtre por la ubicaci&oacute;n del negocio.' class='col-12 col-md-4'>
+                    <mat-label>Pueblo o ciudad</mat-label>
+                    <mat-select formControlName='cityControl' (ngModelChange)='search()'>
                       <option value=''>Seleccione una ciudad</option>
                       <option *ngFor='let city of cities' [value]='city.normalizedName'>{{city.name}}</option>
-                    </select>
-                    <p class="help">Busque por ubicaci&oacute;n del negocio</p>
-                  </div>
-                </div>
-                <div class='col-12 col-md-3'>
-                  <div class='d-flex flex-column'>
-                    <label>Tipo de negocio</label>
-                    <select formControlName='businessTypeControl' (ngModelChange)='search()'>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field hintLabel='Filtre por el tipo de negocio' class='col-12 col-md-4'>
+                    <mat-label>Tipo de negocio</mat-label>
+                    <mat-select formControlName='businessTypeControl' (ngModelChange)='search()'>
                       <option value=''>Seleccione un tipo</option>
                       <option *ngFor='let type of types' [value]='type.normalizedName'>{{type.name}}</option>
-                    </select>
-                    <p class="help">Buscar por tipo de negocio</p>
-                  </div>
-                </div>
+                    </mat-select>
+                </mat-form-field>
               </div>
             </form>
           </div>

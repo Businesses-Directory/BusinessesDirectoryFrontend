@@ -44,7 +44,7 @@ export class FormDialogComponent implements OnInit {
           validators: [
             Validators.required,
             Validators.maxLength(100),
-            Validators.pattern('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/')
+            Validators.email
           ],
           updateOn: 'change'
         }
@@ -56,7 +56,7 @@ export class FormDialogComponent implements OnInit {
             Validators.required,
             Validators.minLength(10),
             Validators.maxLength(600),
-            Validators.pattern('[A-Za-z0-9áéíóú,ÁÉÍÓÚüÜ@ -]{2,600}')
+            Validators.pattern('[A-Za-z0-9áéíóú,.ÁÉÍÓÚüÜ@ -]{2,600}')
           ],
           updateOn: 'change'
         }

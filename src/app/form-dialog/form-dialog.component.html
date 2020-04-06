@@ -5,10 +5,10 @@
 
   <form [formGroup]='addBusinessForm'>
     <!-- Nombre y Tipo de negocio -->
-    <div>
-      <h2>A&ntilde;adir negocio</h2>
+    <div class='d-flex flex-row justify-content-center'>
+      <h1>A&ntilde;adir negocio</h1>
     </div>
-    <div class='d-flex flex-column flex-md-row justify-content-between'>
+    <div class='d-flex flex-column flex-md-row justify-content-between mb-2'>
       <mat-form-field hintLabel='Escriba el nombre del negocio.' class='col-12 col-md-6'>
         <mat-label>Nombre de negocio</mat-label>
         <input matInput formControlName='businessName' required/>
@@ -28,7 +28,7 @@
     </div>
 
     <!-- Detalles del negocio -->
-    <div class='d-flex flex-column flex-md-row justify-content-between'>
+    <div class='d-flex flex-column flex-md-row justify-content-between mb-2'>
       <mat-form-field hintLabel='Utilice letras, números, espacios y puntos.' class='col-12'>
         <mat-label>Descripci&oacute;n de negocio</mat-label>
         <textarea matInput formControlName='businessDescription' required></textarea>
@@ -38,46 +38,48 @@
     </div>
 
     <!-- Tels -->
-    <div class='d-flex flex-column flex-md-row justify-content-between'>
-      <mat-form-field class='col-12 col-md-6'>
+    <div class='d-flex flex-column flex-md-row justify-content-between mb-2'>
+      <mat-form-field hintLabel='Escriba el n&uacute;mero telef&oacute;nico.' class='col-12 col-md-6'>
         <mat-label>Tel&eacute;fono Primario (S&oacute;lo n&uacute;meros) </mat-label>
-        <input matInput mask='phoneMask' formControlName='primaryPhoneNumber' minlength='10' placeholder="Ejemplo: 17871115050" maxlength='11' type='text' required>
-        <mat-error *ngIf='primaryPhoneNumber.errors?.required'>el número telefónico es requerido.</mat-error>
+        <input matInput mask='phoneMask' formControlName='primaryPhoneNumber' placeholder='Ejemplo: 17871115050' type='text' required>
+        <mat-error *ngIf='primaryPhoneNumber.errors?.required'>El n&uacute;mero telef&oacute;nico es requerido.</mat-error>
         <mat-error *ngIf='primaryPhoneNumber.errors?.pattern'>Favor de entrar un n&uacute;mero v&aacute;lido. (Ejemplo: 17871110022)</mat-error>
       </mat-form-field>
       <mat-form-field hintLabel='Escriba el n&uacute;mero telef&oacute;nico.' class='col-12 col-md-6'>
         <mat-label>Tel&eacute;fono Secundario</mat-label>
-        <input formControlName='secondaryPhoneNumber' minlength='0' placeholder="Ejemplo: 17871115050" maxlength='11' type='number' matInput>
-        <mat-error *ngIf='secondaryPhoneNumber.errors?.pattern'>Favor de entrar un n&uacute;mero v&aacute;lido. (Ejemplo: 17871110022)</mat-error>
+        <input formControlName='secondaryPhoneNumber' placeholder='Ejemplo: 17871115050' type='text' matInput>
+        <mat-error *ngIf='secondaryPhoneNumber.errors?.minLenght'>Utilice al menos diez(10) d&iacute;gitos.</mat-error>
+        <mat-error *ngIf='secondaryPhoneNumber.errors?.maxLenght'>No utilice m&aacute;s de once(11) d&iacute;gitos.</mat-error>
+        <mat-error *ngIf='!secondaryPhoneNumber.errors?.minLenght && !secondaryPhoneNumber.errors?.maxLenght && secondaryPhoneNumber.errors?.pattern'>Uticice n&uacute;meros solamente.</mat-error>
       </mat-form-field>
     </div>
 
     <!-- Pueblo -->
     <div class='d-flex flex-column flex-md-row justify-content-between'>
-      <mat-form-field hintLabel='Seleccione la ciudad'>
-        <mat-label>Pueblo</mat-label>
-        <mat-select formControlName='cityId' required>
-          <mat-option *ngFor='let city of data.cities' [value]='city.cityId'>{{city.name}}</mat-option>
-          <mat-error *ngIf='cityId.errors?.required'>La ciudad es requerida.</mat-error>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field>
+      <mat-form-field hintLabel='Seleccione el tipo de negocio.' class='col-12 col-md-6'>
         <mat-label>Tipo de negocio</mat-label>
         <mat-select formControlName='businessTypeId' required>
           <mat-option *ngFor='let type of data.types' [value]='type.businessTypeId'>{{type.name}}</mat-option>
           <mat-error *ngIf='businessTypeId.errors?.required'>El tipo de negocio es requerido.</mat-error>
         </mat-select>
       </mat-form-field>
+      <mat-form-field hintLabel='Seleccione la ciudad.' class='col-12 col-md-6'>
+        <mat-label>Pueblo</mat-label>
+        <mat-select formControlName='cityId' required>
+          <mat-option *ngFor='let city of data.cities' [value]='city.cityId'>{{city.name}}</mat-option>
+          <mat-error *ngIf='cityId.errors?.required'>La ciudad es requerida.</mat-error>
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <!-- Social -->
-    <div class='d-flex flex-column flex-md-row justify-content-between'>
-      <mat-form-field class='col-12 col-md-6'>
+    <div class='d-flex flex-column flex-md-row justify-content-between mb-2'>
+      <mat-form-field hintLabel='Escriba el nombre del negocio en facebook.' class='col-12 col-md-6'>
         <mat-label>Facebook</mat-label>
         <input formControlName='inFacebookAs' matInput>
       <mat-error *ngIf='inFacebookAs.errors?.pattern'>Se aceptan letras, n&uacute;meros, _ y -</mat-error>
       </mat-form-field>
-      <mat-form-field class='col-12 col-md-6'>
+      <mat-form-field hintLabel='Escriba el nombre del negocio en instagram.' class='col-12 col-md-6'>
         <mat-label>Instagram</mat-label>
         <input formControlName='inInstagramAs' matInput>
       <mat-error *ngIf='inInstagramAs.errors?.pattern'>Se aceptan letras, n&uacute;meros, _ y -</mat-error>
@@ -85,9 +87,11 @@
     </div>
 
     <!-- Features -->
-    <div class='d-flex flex-column'>
-      <h2>Opciones de pedido</h2>
-      <div class='d-flex'>
+    <div class='d-flex flex-column mb-3'>
+      <div class='d-flex flex-row px-2'>
+        <h2>Opciones de pedido</h2>
+      </div>
+      <div class='d-flex flex-column flex-md-row justify-content-between px-2'>
         <mat-checkbox formControlName='hasDelivery'>Delivery</mat-checkbox>
         <mat-checkbox formControlName='hasCarryOut'>Carry Out</mat-checkbox>
         <mat-checkbox formControlName='hasAthMovil'>ATH M&oacute;vil</mat-checkbox>
@@ -98,46 +102,48 @@
     </div>
 
     <!-- Horario -->
-    <div class='d-flex flex-column'>
-      <h2>Horario</h2>
-      <div class='d-flex flex-column flex-sm-row justify-content-between'>
-        <mat-form-field hintLabel='8:00AM-11:00PM'>
+    <div class='d-flex flex-column mb-2'>
+      <div class='col-12'>
+        <h2>Horario</h2>
+      </div>
+      <div class='row'>
+        <mat-form-field hintLabel='8:00AM-11:00PM' class='col-12 col-md-2'>
           <mat-label>Lunes</mat-label>
           <input formControlName='mondayHours' matInput>
           <mat-error *ngIf='mondayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field hintLabel='8:00AM-11:00PM'>
+        <mat-form-field hintLabel='8:00AM-11:00PM' class='col-12 col-md-2'>
           <mat-label>Martes</mat-label>
           <input formControlName='tuesdayHours' matInput>
           <mat-error *ngIf='tuesdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field hintLabel='8:00AM-11:00PM'>
+        <mat-form-field hintLabel='8:00AM-11:00PM' class='col-12 col-md-2'>
           <mat-label>Miercoles</mat-label>
           <input formControlName='wednesdayHours' matInput>
           <mat-error *ngIf='wednesdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field hintLabel='8:00AM-11:00PM'>
+        <mat-form-field hintLabel='8:00AM-11:00PM' class='col-12 col-md-2'>
           <mat-label>Jueves</mat-label>
           <input formControlName='thursdayHours' matInput>
           <mat-error *ngIf='thursdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field hintLabel='8:00AM-11:00PM'>
+        <mat-form-field hintLabel='8:00AM-11:00PM' class='col-12 col-md-2'>
           <mat-label>Viernes</mat-label>
           <input formControlName='fridayHours' matInput>
           <mat-error *ngIf='fridayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field hintLabel='8:00AM-11:00PM'>
+        <mat-form-field hintLabel='8:00AM-11:00PM' class='col-12 col-md-2'>
           <mat-label>S&aacute;bado</mat-label>
           <input formControlName='saturdayHours' matInput>
           <mat-error *ngIf='saturdayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
         </mat-form-field>
 
-        <mat-form-field hintLabel='8:00AM-11:00PM'>
+        <mat-form-field hintLabel='8:00AM-11:00PM' class='col-12 col-md-2'>
           <mat-label>Domingo</mat-label>
           <input formControlName='sundayHours' matInput>
           <mat-error *ngIf='sundayHours.errors?.pattern'>Ejemplo de formato: 5:30AM-11:59PM</mat-error>
@@ -145,14 +151,18 @@
       </div>
     </div>
     <!-- <mat-dialog-actions> -->
-    <div class='d-flex flex-row'>
+    <div class='d-flex flex-column my-3'>
       <re-captcha formControlName="captcha" siteKey='6Lc1UeQUAAAAAKCDJd1Y1DuICWsXcwmQWxLU35o0'></re-captcha>
       <mat-error *ngIf='captcha.errors?.required'>La verificaci&oacute;n es requerida</mat-error>
     </div>
     <!-- Form is always invalid for some reason -->
-    <div class='d-flex flex-column flex-row'>
-      <button mat-raised-button color='primary' [disabled]='false' (click)='addBusiness()' class='dialog-btn'>Crear</button>
-      <button mat-button [mat-dialog-close]='this.addBusinessForm.value' color='accent' class='dialog-btn'>Cancelar</button>
+    <div class='d-flex flex-md-row justify-content-between mb-2'>
+      <div>
+        <button mat-raised-button color='primary' [disabled]='!this.addBusinessForm.valid' (click)='addBusiness()' class='dialog-btn'>Crear</button>
+      </div>
+      <div>
+        <button mat-button [mat-dialog-close]='this.addBusinessForm.value' color='accent' class='dialog-btn'>Cancelar</button>
+      </div>
     </div>
     <!-- </mat-dialog-actions> -->
 
