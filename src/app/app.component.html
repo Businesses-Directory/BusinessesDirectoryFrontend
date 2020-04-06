@@ -86,7 +86,7 @@
                   </mat-list-item>
                 </mat-list>
 
-                <mat-list>
+                <mat-list *ngIf='business.hasDelivery || business.hasCarryOut || business.hasAthMovil || business.inDameUnBite || business.inUberEats || business.inUva'>
                   <div mat-subheader>Servicios</div>
                   <mat-list-item  *ngIf='business.hasDelivery'>
                     Delivery
