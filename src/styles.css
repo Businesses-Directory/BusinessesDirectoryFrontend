@@ -15,20 +15,13 @@ body {
 }
 
 main.app {
-	display: grid;
+  display: grid;
+  gap: 1rem;
+  height: 100%;
 }
 
 main.app > * {
-  padding: 2rem;
-}
-
-#negocios {
-	padding: 1.5rem;
-	display: grid;
-	grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
-  gap: 1rem;
-  max-width: 90%;
-  margin: 0 auto;
+  padding: 1rem 2rem;
 }
 
 #header {
@@ -45,21 +38,22 @@ main.app > * {
   display: grid;
   font-weight: bold;
   line-height: 1;
-  font-size: 1.75rem;
+  font-size: 1.3rem;
   color: #fff
 }
 
 #header h1 small {
 	color: #e3e3e3;
-	font-size: 1.5rem;
   font-weight: normal;
   line-height: 1;
+  font-size: 1rem;
 }
-
+#add-business-btn {
+  padding-right: 1rem;
+}
 .link {
   color:  rgb(63, 82, 167) !important;
   text-decoration: none;
-
 }
 .link:hover {
   cursor: pointer;
@@ -73,56 +67,13 @@ main.app > * {
 	border-radius: 0.25rem;
 	background-color: #fff !important;
 }
-.shop-name {
+
+.flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-#negocios {
-  display: grid;
-  list-style: none;
-  gap: 1rem;
-}
-
-.business-card {
-  display:grid;
-  line-height: 1.5;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-	padding: 0.5rem;
-	border-radius: 0.25rem;
-	background-color: #fff !important;
-}
-
-.business-card h2 {
-  display:grid;
-  line-height: 1.2;
-}
-
-.business-card h2 small {
-font-weight: normal;
-}
-
-.business-card h4 {
-  line-height: 1.25;
-  margin: 0;
-  font-weight: bold;
-}
-
-.business-card section {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  line-height: .9;
-  /* place-items: center; */
-}
-.business-card section div p {
-  line-height: .5;
-}
-.business-type {
-  font-weight: normal;
-  display: block;
-  font-size: .875rem;
-}
 .options li {
   box-shadow: none !important;
   list-style: none;
@@ -130,11 +81,35 @@ font-weight: normal;
   margin-bottom: .5rem;
 }
 
+#businesses {
+  display: grid;
+  gap: 1rem;
+}
+
+#business-header {
+  text-align: center;
+  display: grid;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+#business-list {
+  display: grid;
+  list-style: none;
+  gap: 1rem;
+	grid-template-columns: 1fr 1fr;
+}
+@media only screen and (max-width: 768px) {
+  #business-list {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* FORMS------------------------------------------- */
 
-.form-input {
+.search-form {
 	display: grid;
-	gap: 1rem;
+
 	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
@@ -212,7 +187,7 @@ input[checkbox] {
 .grid-blocks {
   display: grid;
 	gap: 0.5rem;
-	grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 }
 
 .search {
@@ -234,9 +209,9 @@ a svg {
 
 
 #search {
-  height: 25vh;
+  /* height: 25vh; */
   /* background-color: red; */
-  margin-bottom: 3rem;
+  /* margin-bottom: 3rem; */
 }
 .help {
   color: rgba(37, 50, 106, 0.7);
