@@ -4,8 +4,6 @@ import {FormBuilder, FormGroup, Validators, AbstractControl} from '@angular/form
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import Swal from 'sweetalert2';
 
-// import {BusinessService} from '../business.service';
-
 @Component({
   selector: 'app-form-dialog',
   templateUrl: './form-dialog.component.html',
@@ -13,14 +11,22 @@ import Swal from 'sweetalert2';
 })
 
 export class FormDialogComponent implements OnInit {
-
-  addBusinessForm: FormGroup;
+  public phoneMask = ['[1]{0,1}', '(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
+  public addBusinessForm: FormGroup;
 
   constructor(private service: BusinessService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit(): void {
     this.addBusinessForm = this.fb.group({
-      captcha: [null, {validators: [Validators.required], updateOn: 'change'}],
+      captcha: [
+        null,
+        {
+          validators: [
+          Validators.required
+          ],
+          updateOn: 'change'
+        }
+      ],
       businessName: [
         null,
         {
@@ -32,143 +38,206 @@ export class FormDialogComponent implements OnInit {
           updateOn: 'change'
         }
       ],
-      businessTypeId: [
-        '',
+      businessEmail: [
+        null,
         {
-          validators: [Validators.required],
+          validators: [
+            Validators.required,
+            Validators.maxLength(100),
+            Validators.pattern('/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/')
+          ],
           updateOn: 'change'
         }
       ],
       businessDescription: [
         null,
         {
-          validators: [Validators.required, Validators.minLength(10), Validators.maxLength(1000)],
+          validators: [
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(600),
+            Validators.pattern('[A-Za-z0-9áéíóú,ÁÉÍÓÚüÜ@ -]{2,600}')
+          ],
           updateOn: 'change'
         }
       ],
       primaryPhoneNumber: [
         null,
         {
-          validators: [Validators.required, Validators.minLength(10), Validators.maxLength(13), Validators.pattern('[0-9]{10,13}')],
+          validators: [
+            Validators.required,
+            Validators.minLength(10),
+            Validators.maxLength(11),
+            Validators.pattern('[0-9]{10,11}')
+          ],
           updateOn: 'change'
         }
       ],
       secondaryPhoneNumber: [
         null,
         {
-          validators: [Validators.minLength(10), Validators.maxLength(13), Validators.pattern('[0-9]{10,13}')],
+          validators: [
+            Validators.minLength(10),
+            Validators.maxLength(11),
+            Validators.pattern('[0-9]{10,11}')
+          ],
+          updateOn: 'change'
+        }
+      ],
+      businessTypeId: [
+        '',
+        {
+          validators: [
+            Validators.required
+          ],
           updateOn: 'change'
         }
       ],
       cityId: [
         '',
         {
-          validators: [Validators.required],
+          validators: [
+            Validators.required
+          ],
           updateOn: 'change'
         }
       ],
       inFacebookAs: [
         null,
         {
-          validators: [ Validators.minLength(3), Validators.maxLength(100), Validators.pattern('[A-Za-z0-9_ -]{0,100}')],
+          validators: [
+            Validators.minLength(3),
+            Validators.maxLength(100),
+            Validators.pattern('[A-Za-z0-9_ -]{0,100}')
+          ],
           updateOn: 'change'
         }
       ],
       inInstagramAs: [
         null,
         {
-          validators: [ Validators.minLength(3), Validators.maxLength(100), Validators.pattern('[A-Za-z0-9_ -]{0,100}')],
+          validators: [
+            Validators.minLength(3),
+            Validators.maxLength(100),
+            Validators.pattern('[A-Za-z0-9_ -]{0,100}')
+          ],
           updateOn: 'change'
         }
       ],
       hasDelivery: [
-        null,
+        false,
         {
-          validators: [ Validators.requiredTrue],
+          validators: [
+            Validators.requiredTrue
+          ],
           updateOn: 'change'
         }
       ],
       hasCarryOut: [
-        null,
+        false,
         {
-          validators: [ Validators.requiredTrue],
+          validators: [
+            Validators.requiredTrue
+          ],
           updateOn: 'change'
         }
       ],
       hasAthMovil: [
-        null,
+        false,
         {
-          validators: [ Validators.requiredTrue],
+          validators: [
+            Validators.requiredTrue
+          ],
           updateOn: 'change'
         }
       ],
       inUberEats: [
-        null,
+        false,
         {
-          validators: [ Validators.requiredTrue],
+          validators: [
+            Validators.requiredTrue
+          ],
           updateOn: 'change'
         }
       ],
       inDameUnBite: [
-        null,
+        false,
         {
-          validators: [Validators.requiredTrue],
+          validators: [
+            Validators.requiredTrue
+          ],
           updateOn: 'change'
         }
       ],
       inUva: [
-        null,
+        false,
         {
-          validators: [Validators.requiredTrue],
+          validators: [
+            Validators.requiredTrue
+          ],
           updateOn: 'change'
         }
       ],
       mondayHours: [
         null,
         {
-          validators: [  Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')],
+          validators: [
+            Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')
+          ],
           updateOn: 'change'
         }
       ],
       tuesdayHours: [
         null,
         {
-          validators: [  Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')],
+          validators: [
+            Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')
+          ],
           updateOn: 'change'
         }
       ],
       wednesdayHours: [
         null,
         {
-          validators: [  Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')],
+          validators: [
+            Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')
+          ],
           updateOn: 'change'
         }
       ],
       thursdayHours: [
         null,
         {
-          validators: [  Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')],
+          validators: [
+            Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')
+          ],
           updateOn: 'change'
         }
       ],
       fridayHours: [
         null,
         {
-          validators: [  Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')],
+          validators: [
+            Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')
+          ],
           updateOn: 'change'
         }
       ],
       saturdayHours: [
         null,
         {
-          validators: [  Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')],
+          validators: [
+            Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')
+          ],
           updateOn: 'change'
         }
       ],
       sundayHours: [
         null,
         {
-          validators: [  Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')],
+          validators: [
+            Validators.pattern('((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))-((1[0-2]|[1-9]):([0-5][0-9])([AP][M]))')
+          ],
           updateOn: 'change'
         }
       ],
@@ -244,10 +313,6 @@ export class FormDialogComponent implements OnInit {
       console.error(error);
       Swal.fire('Encontramos un error procesando la forma. Favor de intentar nuevamente.');
     }, () => {});
-
-    // if (this.addBusinessForm.valid) {
-     // submit (run try)
-    // }
   }
 
   get captcha() {
@@ -257,88 +322,118 @@ export class FormDialogComponent implements OnInit {
   get businessName() {
     return this.addBusinessForm.get('businessName');
   }
-  get businessTypeId() {
-    return this.addBusinessForm.get('addBusinessForm');
+  get businessEmail() {
+    return this.addBusinessForm.get('businessEmail');
   }
-  get cityId() {
-    return this.addBusinessForm.get('cityId');
-  }
+
   get businessDescription() {
     return this.addBusinessForm.get('businessDescription');
   }
+
   get primaryPhoneNumber() {
     return this.addBusinessForm.get('primaryPhoneNumber');
   }
+
   get secondaryPhoneNumber() {
     return this.addBusinessForm.get('secondaryPhoneNumber');
   }
+
+  get businessTypeId() {
+    return this.addBusinessForm.get('businessTypeId');
+  }
+
+  get cityId() {
+    return this.addBusinessForm.get('cityId');
+  }
+
   get inFacebookAs() {
     return this.addBusinessForm.get('inFacebookAs');
   }
+
   get inInstagramAs() {
     return this.addBusinessForm.get('inInstagramAs');
   }
+
   get hasDelivery() {
     return this.addBusinessForm.get('hasDelivery');
   }
+
   get hasCarryOut() {
     return this.addBusinessForm.get('hasCarryOut');
   }
+
   get hasAthMovil() {
     return this.addBusinessForm.get('hasAthMovil');
   }
+
   get inUberEats() {
     return this.addBusinessForm.get('inUberEats');
   }
+
   get inDameUnBite() {
     return this.addBusinessForm.get('inDameUnBite');
   }
+
   get inUva() {
     return this.addBusinessForm.get('inUva');
   }
+
   get businessHours() {
     return this.addBusinessForm.get('businessHours');
   }
   get monday() {
     return this.addBusinessForm.get('monday');
   }
+
   get mondayHours() {
     return this.addBusinessForm.get('mondayHours');
   }
+
   get tuesday() {
     return this.addBusinessForm.get('tuesday');
   }
+
   get tuesdayHours() {
     return this.addBusinessForm.get('tuesdayHours');
   }
+
   get wednesday() {
     return this.addBusinessForm.get('wednesday');
   }
+
   get wednesdayHours() {
     return this.addBusinessForm.get('wednesdayHours');
   }
   get thursday() {
     return this.addBusinessForm.get('thursday');
   }
+
   get thursdayHours() {
     return this.addBusinessForm.get('thursdayHours');
   }
+
   get friday() {
     return this.addBusinessForm.get('friday');
   }
+
   get fridayHours() {
     return this.addBusinessForm.get('fridayHours');
   }
+
   get saturday() {
     return this.addBusinessForm.get('saturday');
   }
+
   get saturdayHours() {
     return this.addBusinessForm.get('saturdayHours');
   }
+
   get sunday() {
     return this.addBusinessForm.get('sunday');
   }
+
   get sundayHours() {
     return this.addBusinessForm.get('sundayHours');
   }
+
 }

@@ -9,12 +9,21 @@
       <h2>A&ntilde;adir negocio</h2>
     </div>
     <div class='d-flex flex-column flex-md-row justify-content-between'>
-      <mat-form-field class='col-12'>
+      <mat-form-field hintLabel='Escriba el nombre del negocio.' class='col-12 col-md-6'>
         <mat-label>Nombre de negocio</mat-label>
         <input matInput formControlName='businessName' required/>
+        <mat-error *ngIf='businessName.errors?.required'>El nombre del negocio es requerido.</mat-error>
         <mat-error *ngIf='businessName.errors?.minimumLength'>El nombre debe tener m&acute;s de tres(3) letras.</mat-error>
         <mat-error *ngIf='businessName.errors?.pattern'>Utilice s&oacute;lo letras, n&uacute;meros, apostrofes</mat-error>
         <mat-error *ngIf='businessName.errors?.maxlength'>No puede utilizar mas de 200 caracteres, se paso por: {{businessName.errors.maxlength.actualLength - businessName.errors.maxlength.requiredLength}}</mat-error>
+      </mat-form-field>
+      <mat-form-field hintLabel='Escriba el email del negocio. ejemplo: email@email.com' class='col-12 col-md-6'>
+        <mat-label>Correo electrónico del negocio</mat-label>
+        <input matInput formControlName='businessEmail' required/>
+        <mat-error *ngIf='businessEmail.errors?.required'>El correo electr&oacute;nico es requerido.</mat-error>
+        <mat-error *ngIf='businessEmail.errors?.minimumLength'>Entre un correo electrónico válido.</mat-error>
+        <mat-error *ngIf='businessEmail.errors?.pattern'>Utilice s&oacute;lo letras, n&uacute;meros, apostrofes</mat-error>
+        <mat-error *ngIf='businessEmail.errors?.maxlength'>Email email no debe contener m&aacute;s de cien caracteres. Se pasó por: {{businessEmail.errors.maxlength.actualLength - businessEmail.errors.maxlength.requiredLength}}</mat-error>
       </mat-form-field>
     </div>
 
@@ -23,6 +32,7 @@
       <mat-form-field hintLabel='Utilice letras, números, espacios y puntos.' class='col-12'>
         <mat-label>Descripci&oacute;n de negocio</mat-label>
         <textarea matInput formControlName='businessDescription' required></textarea>
+        <mat-error *ngIf='businessDescription.errors?.required'>La descripci&oacute;n del negocio es requerida.</mat-error>
         <mat-error *ngIf='businessDescription.errors?.minlength'>Debe tener m&aacute;s de 10 car&aacute;cteres</mat-error>
       </mat-form-field>
     </div>
@@ -31,40 +41,43 @@
     <div class='d-flex flex-column flex-md-row justify-content-between'>
       <mat-form-field class='col-12 col-md-6'>
         <mat-label>Tel&eacute;fono Primario (S&oacute;lo n&uacute;meros) </mat-label>
-        <input matInput formControlName='primaryPhoneNumber' minlength='10' placeholder="Ejemplo: 17871115050" maxlength='13' type='number' required>
+        <input matInput mask='phoneMask' formControlName='primaryPhoneNumber' minlength='10' placeholder="Ejemplo: 17871115050" maxlength='11' type='text' required>
+        <mat-error *ngIf='primaryPhoneNumber.errors?.required'>el número telefónico es requerido.</mat-error>
         <mat-error *ngIf='primaryPhoneNumber.errors?.pattern'>Favor de entrar un n&uacute;mero v&aacute;lido. (Ejemplo: 17871110022)</mat-error>
       </mat-form-field>
-      <mat-form-field class='col-12 col-md-6'>
+      <mat-form-field hintLabel='Escriba el n&uacute;mero telef&oacute;nico.' class='col-12 col-md-6'>
         <mat-label>Tel&eacute;fono Secundario</mat-label>
-        <input formControlName='secondaryPhoneNumber' minlength='0' placeholder="Ejemplo: 17871115050" maxlength='13' type='number' matInput>
+        <input formControlName='secondaryPhoneNumber' minlength='0' placeholder="Ejemplo: 17871115050" maxlength='11' type='number' matInput>
         <mat-error *ngIf='secondaryPhoneNumber.errors?.pattern'>Favor de entrar un n&uacute;mero v&aacute;lido. (Ejemplo: 17871110022)</mat-error>
       </mat-form-field>
     </div>
 
     <!-- Pueblo -->
-    <mat-form-field>
-      <mat-label>Pueblo</mat-label>
-      <mat-select formControlName='cityId' required>
-        <mat-option *ngFor='let city of data.cities' [value]='city.cityId'>{{city.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Tipo de negocio</mat-label>
-      <mat-select formControlName='businessTypeId' required>
-        <mat-option *ngFor='let type of data.types' [value]='type.businessTypeId'>{{type.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class='d-flex flex-column flex-md-row justify-content-between'>
+      <mat-form-field hintLabel='Seleccione la ciudad'>
+        <mat-label>Pueblo</mat-label>
+        <mat-select formControlName='cityId' required>
+          <mat-option *ngFor='let city of data.cities' [value]='city.cityId'>{{city.name}}</mat-option>
+          <mat-error *ngIf='cityId.errors?.required'>La ciudad es requerida.</mat-error>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tipo de negocio</mat-label>
+        <mat-select formControlName='businessTypeId' required>
+          <mat-option *ngFor='let type of data.types' [value]='type.businessTypeId'>{{type.name}}</mat-option>
+          <mat-error *ngIf='businessTypeId.errors?.required'>El tipo de negocio es requerido.</mat-error>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
     <!-- Social -->
-    <div class="grid-blocks">
-      <mat-form-field>
+    <div class='d-flex flex-column flex-md-row justify-content-between'>
+      <mat-form-field class='col-12 col-md-6'>
         <mat-label>Facebook</mat-label>
         <input formControlName='inFacebookAs' matInput>
       <mat-error *ngIf='inFacebookAs.errors?.pattern'>Se aceptan letras, n&uacute;meros, _ y -</mat-error>
       </mat-form-field>
-
-      <mat-form-field>
+      <mat-form-field class='col-12 col-md-6'>
         <mat-label>Instagram</mat-label>
         <input formControlName='inInstagramAs' matInput>
       <mat-error *ngIf='inInstagramAs.errors?.pattern'>Se aceptan letras, n&uacute;meros, _ y -</mat-error>
@@ -72,9 +85,9 @@
     </div>
 
     <!-- Features -->
-    <div class='d-flex flex-inline'>
+    <div class='d-flex flex-column'>
       <h2>Opciones de pedido</h2>
-      <div class='grid-blocks'>
+      <div class='d-flex'>
         <mat-checkbox formControlName='hasDelivery'>Delivery</mat-checkbox>
         <mat-checkbox formControlName='hasCarryOut'>Carry Out</mat-checkbox>
         <mat-checkbox formControlName='hasAthMovil'>ATH M&oacute;vil</mat-checkbox>
@@ -132,13 +145,15 @@
       </div>
     </div>
     <!-- <mat-dialog-actions> -->
-
-    <re-captcha formControlName="captcha" siteKey='6Lc1UeQUAAAAAKCDJd1Y1DuICWsXcwmQWxLU35o0'></re-captcha>
-    <mat-error *ngIf='captcha.errors?.required'>La verificaci&oacute;n es requerida</mat-error>
-
+    <div class='d-flex flex-row'>
+      <re-captcha formControlName="captcha" siteKey='6Lc1UeQUAAAAAKCDJd1Y1DuICWsXcwmQWxLU35o0'></re-captcha>
+      <mat-error *ngIf='captcha.errors?.required'>La verificaci&oacute;n es requerida</mat-error>
+    </div>
     <!-- Form is always invalid for some reason -->
-    <button mat-raised-button color="primary" [disabled]='false' (click)='addBusiness()' class='dialog-btn' style="margin-top: 2rem;">Crear</button>
-    <button mat-button [mat-dialog-close]='this.addBusinessForm.value' class='dialog-btn' style="margin-top: 2rem;">Cancelar</button>
+    <div class='d-flex flex-column flex-row'>
+      <button mat-raised-button color='primary' [disabled]='false' (click)='addBusiness()' class='dialog-btn'>Crear</button>
+      <button mat-button [mat-dialog-close]='this.addBusinessForm.value' color='accent' class='dialog-btn'>Cancelar</button>
+    </div>
     <!-- </mat-dialog-actions> -->
 
   </form>
