@@ -131,9 +131,14 @@
       </div>
     </div>
     <!-- <mat-dialog-actions> -->
-
-    <re-captcha formControlName="captcha" siteKey='6Lc1UeQUAAAAAKCDJd1Y1DuICWsXcwmQWxLU35o0'></re-captcha>
+      <br>
+      <div style="margin: 1rem auto;">
+        <re-captcha formControlName="captcha" siteKey='6Lc1UeQUAAAAAKCDJd1Y1DuICWsXcwmQWxLU35o0'></re-captcha>
     <mat-error *ngIf='captcha.errors?.required'>La verificaci&oacute;n es requerida</mat-error>
+
+      </div>
+
+
 
     <!-- Form is always invalid for some reason -->
     <button mat-raised-button color="primary" [disabled]='false' (click)='addBusiness()' class='dialog-btn' style="margin-top: 2rem;">Crear</button>
