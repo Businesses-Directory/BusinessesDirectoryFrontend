@@ -14,16 +14,14 @@ import { IError } from 'src/models/interfaces/ierror';
 })
 
 export class FormDialogComponent implements OnInit {
-  // public phoneMask = ['(', /\d/, /\d/, /\d/, ')', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/];
   public phoneMask = '((1(787)|(787))[\d]{3}-[\d]{4})';
   public addBusinessForm: FormGroup;
 
   constructor(private service: BusinessService, private fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: ICreateBusinessData) { }
-
   ngOnInit(): void {
     this.addBusinessForm = this.fb.group({
       captcha: [
-        false,
+        null,
         {
           validators: [
             Validators.requiredTrue
@@ -89,7 +87,7 @@ export class FormDialogComponent implements OnInit {
         }
       ],
       businessTypeId: [
-        '',
+        null,
         {
           validators: [
             Validators.required
@@ -98,7 +96,7 @@ export class FormDialogComponent implements OnInit {
         }
       ],
       cityId: [
-        '',
+        null,
         {
           validators: [
             Validators.required
