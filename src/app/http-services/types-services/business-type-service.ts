@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { BusinessTypeModel } from 'src/models/received-models/types-models/business-type-model';
 import { HttpResponse, HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const apiRoutes = {
-  getTypes: `https://localhost:5003/api/businesstypes`,
-  getType: (id: string) => `https://localhost:5003/api/businesstypes/${id}`
+  getTypes: `/businesstypes`,
+  getType: (id: string) => `/businesstypes/${id}`
 };
 
 @Injectable({
@@ -13,13 +14,15 @@ const apiRoutes = {
 })
 
 export class BusinessTypeService {
-
-  constructor(private http: HttpClient) { }
+  private apiUrl: any;
+  constructor(private http: HttpClient) {
+    this.apiUrl = environment.apiUrl;
+   }
 
   public getTypes(): Observable<HttpResponse<Array<BusinessTypeModel>>> {
-    return this.http.get<Array<BusinessTypeModel>>(apiRoutes.getTypes, { observe: 'response' });
+    return this.http.get<Array<BusinessTypeModel>>(this.apiUrl + apiRoutes.getTypes, { observe: 'response' });
   }
   public getType(id: string): Observable<HttpResponse<BusinessTypeModel>> {
-    return this.http.get<BusinessTypeModel>(apiRoutes.getType(id), {observe: 'response'});
+    return this.http.get<BusinessTypeModel>(this.apiUrl + apiRoutes.getType(id), {observe: 'response'});
   }
 }

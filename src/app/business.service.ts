@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import {FormGroup, FormControl} from '@angular/forms';
 import { BusinessToCreateModel } from 'src/models/BusinessToCreateModel';
 import { BusinessToListModel } from 'src/models/received-models/business-models/business-to-list-model';
+import { environment } from 'src/environments/environment';
 
 const apiRoutes = {
-  getBusinesses: `https://localhost:5003/api/businesses`
+  getBusinesses: `/businesses`
 };
 
 @Injectable({
@@ -15,8 +16,10 @@ const apiRoutes = {
 
 export class BusinessService {
   private headers: HttpHeaders;
+  private apiUrl: string;
 
   constructor(private http: HttpClient) {
+    this.apiUrl = environment.apiUrl;
       this.headers = new HttpHeaders({'Content-Type': 'application/json; charset=utf-8'});
   }
 
@@ -37,7 +40,7 @@ export class BusinessService {
     if (type) {
       params = params.append('type', type);
     }
-    return this.http.get<Array<BusinessToListModel>>(apiRoutes.getBusinesses, { observe: 'response', params });
+    return this.http.get<Array<BusinessToListModel>>(this.apiUrl + apiRoutes.getBusinesses, { observe: 'response', params });
   }
 
   public addBusiness(businessToCreate: BusinessToCreateModel): Observable<HttpResponse<BusinessToListModel>> {
@@ -45,6 +48,6 @@ export class BusinessService {
       const body = JSON.stringify(businessToCreate);
       console.log(body);
 
-      return this.http.post<BusinessToListModel>(apiRoutes.getBusinesses, body, { observe: 'response', headers: this.headers});
+      return this.http.post<BusinessToListModel>(this.apiUrl + apiRoutes.getBusinesses, body, { observe: 'response', headers: this.headers});
   }
 }
