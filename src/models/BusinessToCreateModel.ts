@@ -1,5 +1,6 @@
 export class  BusinessToCreateModel {
   businessName: string;
+  businessEmail?: string;
   businessTypeId: string;
   businessDescription: string;
   primaryPhoneNumber: string;

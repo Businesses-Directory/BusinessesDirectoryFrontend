@@ -45,6 +45,11 @@
         <input formControlName='secondaryPhoneNumber' minlength='0' placeholder="Ejemplo: 17871115050" maxlength='13' type='number' matInput>
         <mat-error *ngIf='secondaryPhoneNumber.errors?.pattern'>Favor de entrar un n&uacute;mero v&aacute;lido. (Ejemplo: 17871110022)</mat-error>
       </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email </mat-label>
+        <input matInput formControlName='businessEmail' placeholder="joe@example.com" type='email'>
+        <mat-error *ngIf='businessEmail.errors?.email'>Favor de entrar email v&aacute;lido.</mat-error>
+      </mat-form-field>
     </div>
 
     <!-- Pueblo -->

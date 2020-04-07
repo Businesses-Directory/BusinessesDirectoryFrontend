@@ -5,6 +5,7 @@ import { CityModel } from '../location-models/city-model';
 export class BusinessToListModel {
   businessId: string = null;
   businessName: string = null;
+  businessEmail: string = null;
   businessType: BusinessTypeModel;
   businessDescription: string = null;
   primaryPhoneNumber: string = null;

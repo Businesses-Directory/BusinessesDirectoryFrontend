@@ -46,6 +46,16 @@ export class FormDialogComponent implements OnInit {
           updateOn: 'change'
         }
       ],
+      businessEmail: [
+        null,
+        {
+          validators: [
+            Validators.maxLength(100),
+            Validators.email
+          ],
+          updateOn: 'change'
+        }
+      ],
       primaryPhoneNumber: [
         null,
         {
@@ -82,44 +92,56 @@ export class FormDialogComponent implements OnInit {
         }
       ],
       hasDelivery: [
-        null,
+        false,
         {
-          validators: [ Validators.requiredTrue],
+          validators: [
+            Validators.required
+          ],
           updateOn: 'change'
         }
       ],
       hasCarryOut: [
-        null,
+        false,
         {
-          validators: [ Validators.requiredTrue],
+          validators: [
+            Validators.required
+          ],
           updateOn: 'change'
         }
       ],
       hasAthMovil: [
-        null,
+        false,
         {
-          validators: [ Validators.requiredTrue],
+          validators: [
+            Validators.required
+          ],
           updateOn: 'change'
         }
       ],
       inUberEats: [
-        null,
+        false,
         {
-          validators: [ Validators.requiredTrue],
+          validators: [
+            Validators.required
+          ],
           updateOn: 'change'
         }
       ],
       inDameUnBite: [
-        null,
+        false,
         {
-          validators: [Validators.requiredTrue],
+          validators: [
+            Validators.required
+          ],
           updateOn: 'change'
         }
       ],
       inUva: [
-        null,
+        false,
         {
-          validators: [Validators.requiredTrue],
+          validators: [
+            Validators.required
+          ],
           updateOn: 'change'
         }
       ],
@@ -340,5 +362,8 @@ export class FormDialogComponent implements OnInit {
   }
   get sundayHours() {
     return this.addBusinessForm.get('sundayHours');
+  }
+  get businessEmail() {
+    return this.addBusinessForm.get('businessEmail');
   }
 }

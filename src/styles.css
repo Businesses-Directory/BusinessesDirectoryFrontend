@@ -10,7 +10,9 @@ body {
 	font-size: 1rem;
 	font-weight: normal;
   font-family: 'system-ui', sans-serif;
-  background-image:  linear-gradient(rgba(37, 50, 106, 0.01), rgba(37, 50, 106, 0.05));
+  /* background-image:  linear-gradient(rgba(37, 50, 106, 0.01), rgba(37, 50, 106, 0.05)); */
+  background-color:  rgba(37, 50, 106, 0.01);
+
   min-height: 100vh;
 }
 
@@ -97,11 +99,14 @@ main.app > * {
   display: grid;
   list-style: none;
   gap: 1rem;
-	grid-template-columns: 1fr 1fr;
+  max-width: 65%;
+  margin: 0 auto;
+	grid-template-columns: 1fr;
 }
+
 @media only screen and (max-width: 768px) {
   #business-list {
-    grid-template-columns: 1fr;
+    max-width: 95%;
   }
 }
 
@@ -161,6 +166,11 @@ button:not(.dialog-btn):disabled, .btn:disabled {
 
 a.btn {
   text-decoration: none;
+}
+
+.center {
+  text-align: center;
+
 }
 
 .checkbox {
