@@ -1,4 +1,4 @@
-import { BusinessHoursToCreateModel } from './business-hous-to-create-model';
+import { BusinessHoursToCreateModel } from './business-hours-to-create-model';
 
 export class  BusinessToCreateModel {
   businessName: string = null;

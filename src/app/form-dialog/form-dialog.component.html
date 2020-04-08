@@ -155,14 +155,22 @@
       <mat-error *ngIf='captcha.errors?.required'>La verificaci&oacute;n es requerida</mat-error>
     </div>
     <!-- Form is always invalid for some reason -->
-    <div class='d-flex flex-md-row justify-content-between mb-2'>
+    <!-- <div class='d-flex flex-md-row justify-content-between mb-2'>
       <div>
         <button mat-raised-button color='primary' [disabled]='!this.addBusinessForm.valid' (click)='addBusiness()' class='dialog-btn'>Crear</button>
       </div>
       <div>
         <button mat-raised-button color='accent' [mat-dialog-close]='this.addBusinessForm.value' class='dialog-btn'>Cancelar</button>
       </div>
-    </div>
+    </div> -->
   </form>
 </mat-dialog-content>
 <!-- </mat-dialog-container> -->
+<mat-dialog-actions class='d-flex flex-md-row justify-content-between mb-2'>
+  <div>
+    <button mat-raised-button color='primary' [disabled]='!this.addBusinessForm.valid' (click)='addBusiness()' class='dialog-btn'>Crear</button>
+  </div>
+  <div>
+    <button mat-raised-button color='accent' [mat-dialog-close]='this.addBusinessForm.value' class='dialog-btn'>Cancelar</button>
+  </div>
+</mat-dialog-actions>

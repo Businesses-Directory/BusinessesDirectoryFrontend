@@ -44,7 +44,6 @@ export class FormDialogComponent implements OnInit {
         null,
         {
           validators: [
-            Validators.required,
             Validators.maxLength(100),
             Validators.email
           ],
